@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<SeedResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TestPlantSeed</Name>
+  <BasicType>SeedResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <BaseMarketAmount>100</BaseMarketAmount>
+  <Type>SeedResources</Type>
+  <Regions />
+  <ExpirationDate>1500</ExpirationDate>
+  <Multiplier>0</Multiplier>
+  <InitialBasePrice>26</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>0</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>0</MaxPercentageDailyPriceDrop>
+  <TransportToolTag />
+  <TransportMachineTag />
+  <StorageType>SeedsAndPlants</StorageType>
+  <FoodQuality>0.3</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+  <SowingMachine>precisionseeder</SowingMachine>
+  <IsSeedling>false</IsSeedling>
+  <PlantName>TestPlant</PlantName>
+  <SeedAmountPerSqaureMeter>1</SeedAmountPerSqaureMeter>
+  <EnergyDropPerSow>0.05</EnergyDropPerSow>
+  <CanPlantInGlassHouse>false</CanPlantInGlassHouse>
+</SeedResource>

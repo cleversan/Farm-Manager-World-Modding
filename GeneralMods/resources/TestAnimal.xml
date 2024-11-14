@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<AnimalAsResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TestAnimal</Name>
+  <BasicType>AnimalAsResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <BaseMarketAmount>1</BaseMarketAmount>
+  <Type>AnimalsAsResources</Type>
+  <Regions />
+  <ExpirationDate>3000</ExpirationDate>
+  <Multiplier>1</Multiplier>
+  <InitialBasePrice>250</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>0</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>0</MaxPercentageDailyPriceDrop>
+  <TransportToolTag>smallanimaltrailer</TransportToolTag>
+  <TransportMachineTag />
+  <StorageType>SeedsAndPlants</StorageType>
+  <FoodQuality>0.3</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+</AnimalAsResource>

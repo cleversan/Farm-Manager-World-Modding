@@ -1,0 +1,251 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3184697802423432500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7098896022951000528}
+  - component: {fileID: 9218767638678846799}
+  - component: {fileID: 4816375088387355116}
+  m_Layer: 0
+  m_Name: Corn_LOD0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7098896022951000528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184697802423432500}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8374164923063164837}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &9218767638678846799
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184697802423432500}
+  m_Mesh: {fileID: -101732016022186902, guid: 72cd6ed306a38594ba8a516491d781eb, type: 3}
+--- !u!23 &4816375088387355116
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3184697802423432500}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b6ed9aa2cfe50d045970bb8cd726476e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4672940830465518856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7566343049544012294}
+  - component: {fileID: 6409678383132466748}
+  m_Layer: 0
+  m_Name: CornMod_Plant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7566343049544012294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672940830465518856}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.01, y: 0, z: 6.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8374164923063164837}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6409678383132466748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672940830465518856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdfc6fd8e16b994a81fa1501e2cb9ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 7970093062380985246}
+  Plant:
+    Mod:
+      id: 
+      Title: 
+      Author: 
+      Version: 
+      About: 
+      Folder: 
+      assetBundles: []
+    Name: CornMod
+    BasicType: Plant
+    Translation:
+      Name: CornMod
+      LocalizationData:
+      - Language: pl
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: en
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: de
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: pt-BR
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: es
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: fr
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: tr
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: zh-CN
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: it
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: ko
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: ja
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+      - Language: ru
+        LocalizedName: CornMod
+        LocalizedDescription: CornMod
+    SeedResource: CornModSeed
+    FoliageName: CornMod
+    Icon: {fileID: 21300000, guid: 8a806dd5ee9936c479f5cb32b2ba8cad, type: 3}
+    Padding: 0
+    PosVariation: 0
+    PosVariationVector: {x: 0, y: 0, z: 0}
+    GrowScaleX: 1
+    GrowScaleY: 1
+    GrowScaleZ: 1
+    BaseScaleX: 1
+    BaseScaleY: 1
+    BaseScaleZ: 1
+    GrowStates: []
+    PlantAttributes:
+      LeaveHayAfterCrop: 0
+      MutiHarvest: 0
+      Perennial: 0
+      NitrogenInfluence: 0
+      minPh: 6
+      maxPh: 8
+      MinSurvivableTemperature: -10
+      MaxSurvivableTemperature: 40
+      MinGrowthTemeprature: 10
+      MaxGrowthTemperature: 30
+      FungsChance: 0.5
+      HerbsChance: 0.3
+      InsectsChance: 0.8
+      GrowEfficiency: 4.805844
+      GrowingTime: 75
+      GrowAtStart: 0
+      GrowthAfterHarvest: 0.3
+      HarvestingMachine: chopperheader,reaperforcorn
+      BalingMachine: 
+      CollectingMachine: 
+      DensityX: 1
+      DensityY: 1
+    Type: 0
+    HarvestState: 4
+--- !u!1 &7970093062380985246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8374164923063164837}
+  m_Layer: 0
+  m_Name: PlantModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8374164923063164837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970093062380985246}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7098896022951000528}
+  m_Father: {fileID: 7566343049544012294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

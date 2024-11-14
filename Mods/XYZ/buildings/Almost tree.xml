@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Building xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Almost tree</Name>
+  <BasicType>DecoBuilding</BasicType>
+  <WayPoint>
+    <x>-4</x>
+    <y>0</y>
+    <z>-4</z>
+  </WayPoint>
+  <SecWayPoint>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </SecWayPoint>
+  <SoundFXVolume>0</SoundFXVolume>
+  <BuildTime>60</BuildTime>
+  <Monthly>10</Monthly>
+  <Price>100</Price>
+  <RequiredTrainig>0</RequiredTrainig>
+  <StoredResourceType />
+  <MaxAssignedStaffCount>0</MaxAssignedStaffCount>
+  <MaxResourcesCapacity>10</MaxResourcesCapacity>
+  <MaxProductionResourcesCapacity>10</MaxProductionResourcesCapacity>
+  <RangeRadius>50</RangeRadius>
+  <BuildImmediate>false</BuildImmediate>
+  <SnapToGrid>true</SnapToGrid>
+  <SetGroundHeight>false</SetGroundHeight>
+  <VisibleInBuildMenu>true</VisibleInBuildMenu>
+  <CanEntrance>true</CanEntrance>
+  <NeedElectricity>true</NeedElectricity>
+  <ParkingSelectorSnapHelper>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </ParkingSelectorSnapHelper>
+  <Offset>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </Offset>
+</Building>

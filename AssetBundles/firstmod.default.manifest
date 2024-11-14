@@ -1,0 +1,56 @@
+ManifestFileVersion: 0
+CRC: 3070217297
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e36ff469cf6e50ad21f7e0ebb65daaa5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ef3054c66a316c4c5e647a9247dffc78
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: e36ff469cf6e50ad21f7e0ebb65daaa5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 326f14b2e1eabfe4bb7131d323e4d80b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a72d9a3f0ba58ce43816614cd75bc44b, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 205
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: FarmManagerWorld.Modding.Mods.Mod
+- AssemblyName: Assembly-CSharp
+  ClassName: FarmManagerWorld.Modding.ObjectProperties.ResourceType
+- AssemblyName: Assembly-CSharp
+  ClassName: FarmManagerWorld.Modding.ObjectProperties.WarehouseBuildingProperties
+- AssemblyName: Assembly-CSharp
+  ClassName: FarmManagerWorld.Translations.LocalizationData
+- AssemblyName: Assembly-CSharp
+  ClassName: FarmManagerWorld.Translations.Translation
+Assets:
+- Assets/MODS/FirstMod/buildings/ModWarehouse_WarehouseBuilding.prefab
+Dependencies: []

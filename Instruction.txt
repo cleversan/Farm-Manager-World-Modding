@@ -1,0 +1,46 @@
+Old Instruction of saving modding:
+1.  create asset with specific editor component
+2.  add asset to specific assetBundle
+3.  build assetBundle 
+4a. generate xml via editor (it deletes itself)
+4b. generate xml by using BasicEditor and saving options "Save objects to a folder" by selecting them (for example in AssetBundle "Configure" tab)
+5.  copy mod folder to mod folder
+
+New Instruction of saving modding:
+1. create asset with specific editor component and add
+2. add asset to specific assetBundle
+3. generate xml and build assetBundle via "Save objects to a folder" by selecting them (for example in AssetBundle "Configure" tab)
+4. copy mod folder to mod folder 
+
+- Scripts are not executed via mods
+
+Buildings that work:
+- AnimalsBuildingMod
+- ApiaryBuildingMod
+- GarageBuildingMod
+- LogisticBuildingMod
+- WarehouseBuildingMod
+- ProductionBuildingMod
+- HiveBuildingMod
+- IrrigationBuilding
+
+Not checked
+- DecoBuilding
+- GlasshouseBuilding
+- MechanicBuilding
+- StaffBuilding
+- VetBuilding
+
+Things done:
+- easier generating assetBundles and xml definitions this can probably be done by having the option in ModSaveWizard to generate assetBundles after saving everything, XML saving done, 
+  gonna add assetbundle building at the end of XML saving, actually done
+- HiveFeedingLocation is null, add option to add it (its found by name "HiveFeedingLocation"), done
+- Resources are using instead of general properties, done
+- Enforce minimum 1 roadConnector for buildings, fixed when selecting, connected to assetBundles, done
+- Update plant shaders to be up to date, done
+- Update building and machines shaders to be up to date
+- Check what is DecoBuilding/DecorationBuilding in proper project (DecoBuilding is the one that is used), old removed
+- Add regions to buildings which is quite easy after all, done
+
+TODO:
+- Add preview to plants and how they will look

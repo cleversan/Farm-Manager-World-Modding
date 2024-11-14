@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<FoliageResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TestPlant</Name>
+  <BasicType>FoliageResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <BaseMarketAmount>100</BaseMarketAmount>
+  <Type>FoliageResources</Type>
+  <Regions />
+  <ExpirationDate>1500</ExpirationDate>
+  <Multiplier>0</Multiplier>
+  <InitialBasePrice>25</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>0</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>0</MaxPercentageDailyPriceDrop>
+  <TransportToolTag />
+  <TransportMachineTag />
+  <StorageType>SeedsAndPlants</StorageType>
+  <FoodQuality>0.3</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+  <UseHarvestMaterialOnMesh>false</UseHarvestMaterialOnMesh>
+</FoliageResource>

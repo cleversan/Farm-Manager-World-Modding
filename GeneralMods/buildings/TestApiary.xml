@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Building xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TestApiary</Name>
+  <BasicType>ApiaryBuilding</BasicType>
+  <SecWayPoint>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </SecWayPoint>
+  <WayPoint>
+    <x>-4</x>
+    <y>0</y>
+    <z>0</z>
+  </WayPoint>
+  <SoundFXVolume>0</SoundFXVolume>
+  <AllowDestroyFromStep>0</AllowDestroyFromStep>
+  <BuildTime>60</BuildTime>
+  <Monthly>10</Monthly>
+  <Price>100</Price>
+  <RequiredTrainig>3</RequiredTrainig>
+  <StoredResourceType />
+  <MaxAssignedStaffCount>2</MaxAssignedStaffCount>
+  <MaxResourcesCapacity>2500</MaxResourcesCapacity>
+  <MaxProductionResourcesCapacity>2500</MaxProductionResourcesCapacity>
+  <RangeRadius>150</RangeRadius>
+  <BuildImmediate>false</BuildImmediate>
+  <SnapToGrid>true</SnapToGrid>
+  <SetGroundHeight>false</SetGroundHeight>
+  <VisibleInBuildMenu>true</VisibleInBuildMenu>
+  <CanEntrance>true</CanEntrance>
+  <HasWayPoint>true</HasWayPoint>
+  <NeedElectricity>true</NeedElectricity>
+  <CanWander>true</CanWander>
+  <ParkingSelectorSnapHelper>
+    <x>0</x>
+    <y>0</y>
+    <z>0</z>
+  </ParkingSelectorSnapHelper>
+  <MaxDistanceToHive>25</MaxDistanceToHive>
+  <MaxHiveNumber>20</MaxHiveNumber>
+  <HiveBuildingName>TestHive</HiveBuildingName>
+</Building>

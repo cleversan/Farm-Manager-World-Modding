@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<FertilizingResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>ModFertilizer</Name>
+  <BasicType>FertilizingResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <ResourcesPath />
+  <BaseMarketAmount>1000</BaseMarketAmount>
+  <VisibleInMarket>true</VisibleInMarket>
+  <Type>FertilizingResources</Type>
+  <Regions />
+  <ExpirationDate>20</ExpirationDate>
+  <Multiplier>1</Multiplier>
+  <InitialBasePrice>20</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>2</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>2</MaxPercentageDailyPriceDrop>
+  <TransportToolTag />
+  <TransportMachineTag />
+  <StorageType>Agrochemicals</StorageType>
+  <MarketOrderType>0</MarketOrderType>
+  <FoodQuality>1</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+  <FertilizingMachine>TractorMod</FertilizingMachine>
+  <AmountPerSquareMeter>0.1</AmountPerSquareMeter>
+</FertilizingResource>

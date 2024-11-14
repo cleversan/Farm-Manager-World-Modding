@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<OtherResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>SomeTestResource</Name>
+  <BasicType>OtherResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <BaseMarketAmount>100</BaseMarketAmount>
+  <Type>OtherResource</Type>
+  <Regions />
+  <ExpirationDate>50</ExpirationDate>
+  <Multiplier>0</Multiplier>
+  <InitialBasePrice>5</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>0</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>0</MaxPercentageDailyPriceDrop>
+  <TransportToolTag />
+  <TransportMachineTag />
+  <StorageType>DryGoods</StorageType>
+  <FoodQuality>0.3</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+</OtherResource>

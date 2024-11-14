@@ -1,0 +1,134 @@
+{
+    "Translations": [
+        {
+            "Name": "Almost tree",
+            "LocalizationData": [
+                {
+                    "Language": "pl",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "en",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "de",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "pt-BR",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "es",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "fr",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "tr",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "zh-CN",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "it",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "ko",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "ja",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                },
+                {
+                    "Language": "ru",
+                    "LocalizedName": "Almost tree",
+                    "LocalizedDescription": "Almost tree"
+                }
+            ]
+        },
+        {
+            "Name": "xyz",
+            "LocalizationData": [
+                {
+                    "Language": "pl",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "en",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "de",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "pt-BR",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "es",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "fr",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "tr",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "zh-CN",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "it",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "ko",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "ja",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                },
+                {
+                    "Language": "ru",
+                    "LocalizedName": "xyz",
+                    "LocalizedDescription": "xyz"
+                }
+            ]
+        }
+    ]
+}

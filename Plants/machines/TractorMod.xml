@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Vehicle xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>TractorMod</Name>
+  <BasicType>Vehicle</BasicType>
+  <Icon />
+  <Size>XL</Size>
+  <MachineType>Tractor</MachineType>
+  <ExternalMachine>false</ExternalMachine>
+  <VehicleTag />
+  <MachineTag />
+  <Price>1000</Price>
+  <Monthly>10</Monthly>
+  <LeasingPaid>0</LeasingPaid>
+  <CustomName />
+  <MaxFuel>30</MaxFuel>
+  <FuelConsumption>1</FuelConsumption>
+  <FuelConsumptionOnField>2</FuelConsumptionOnField>
+  <Capacity>0</Capacity>
+  <Power>650</Power>
+  <MaxSpeed>50</MaxSpeed>
+</Vehicle>

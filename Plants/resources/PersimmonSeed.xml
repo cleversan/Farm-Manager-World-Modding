@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<SeedResource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>PersimmonSeed</Name>
+  <BasicType>SeedResource</BasicType>
+  <CustomName />
+  <Unit>Default</Unit>
+  <ResourcesPath />
+  <BaseMarketAmount>1000</BaseMarketAmount>
+  <VisibleInMarket>true</VisibleInMarket>
+  <Type>SeedResources</Type>
+  <Regions>
+    <Region>Europe</Region>
+    <Region>Asia</Region>
+    <Region>SouthAmerica</Region>
+  </Regions>
+  <ExpirationDate>30</ExpirationDate>
+  <Multiplier>0</Multiplier>
+  <InitialBasePrice>25</InitialBasePrice>
+  <MaxPercentageDailyPriceGrowth>5</MaxPercentageDailyPriceGrowth>
+  <MaxPercentageDailyPriceDrop>5</MaxPercentageDailyPriceDrop>
+  <TransportToolTag />
+  <TransportMachineTag />
+  <StorageType>SeedsAndPlants</StorageType>
+  <MarketOrderType>0</MarketOrderType>
+  <FoodQuality>1</FoodQuality>
+  <IsOrganic>false</IsOrganic>
+  <SowingMachine />
+  <IsSeedling>true</IsSeedling>
+  <PlantName>Persimmon</PlantName>
+  <SeedAmountPerSqaureMeter>3</SeedAmountPerSqaureMeter>
+  <EnergyDropPerSow>0.05</EnergyDropPerSow>
+  <CanPlantInGlassHouse>true</CanPlantInGlassHouse>
+</SeedResource>

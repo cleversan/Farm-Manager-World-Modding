@@ -1,0 +1,124 @@
+{
+    "Translations": [
+        {
+            "Name": "OneAxisTrailer",
+            "LocalizationData": [
+                {
+                    "Language": "pl",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "en",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "de",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "pt-BR",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "es",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "fr",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "tr",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "zh-CN",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "it",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "ko",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "ja",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                }
+            ]
+        },
+        {
+            "Name": "TractorWithLods",
+            "LocalizationData": [
+                {
+                    "Language": "pl",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "en",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "de",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "pt-BR",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "es",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "fr",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "tr",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "zh-CN",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "it",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "ko",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                },
+                {
+                    "Language": "ja",
+                    "LocalizedName": " ",
+                    "LocalizedDescription": " "
+                }
+            ]
+        }
+    ]
+}
