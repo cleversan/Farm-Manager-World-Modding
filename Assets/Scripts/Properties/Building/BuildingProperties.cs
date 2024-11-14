@@ -53,9 +53,14 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         public float Price = 100;
 
         /// <summary>
-        /// Training ID required to build building, refer to documentation for specific information
+        /// List of Training IDs required to build building, refer to documentation for specific information. 
         /// </summary>
-        public int RequiredTrainig = 0;
+        public List<int> RequiredTraining = new List<int>();
+
+        /// <summary>
+        /// Trainings that building will use for certain actions or upgrades like storage expansion or cooler upgrade. Refer to documentation for specific information.
+        /// </summary>
+        public List<int> AdditionalTraining = new List<int>();
 
         /// <summary>
         /// List of ResourceType that this building can hold

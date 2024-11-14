@@ -1,3 +1,4 @@
+using FarmManagerWorld.Editors;
 using FarmManagerWorld.Modding.ObjectProperties;
 using FarmManagerWorld.Translations;
 using FarmManagerWorld.Utils;
@@ -80,6 +81,9 @@ namespace FarmManagerWorld.Modding.Mods
                 Debug.LogError($"ParkingSpaceCollider cannot be null, validation failed");
                 return false;
             }
+
+            if (TryGetComponent(out MachineEditor machineEditor))            
+                machineEditor.CorrectColliderSize4(parkingSpaceCollider.size);  
 
             return baseMachine.ValidateProperties();
         }

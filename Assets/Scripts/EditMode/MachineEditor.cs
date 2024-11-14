@@ -199,7 +199,7 @@ namespace FarmManagerWorld.Editors
                 result = false;
 
             if (!result)
-                Debug.LogError("Collider size is invalid, width and lenght must be multiple of 4");
+                Debug.LogError("Collider size is invalid, width and lenght must be multiple of 4, size will be corrected automatically");
             else
                 Debug.Log("Collider size is valid");
 

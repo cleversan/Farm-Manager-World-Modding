@@ -360,10 +360,13 @@ namespace FarmManagerWorld.Modding
             return mods;
         }
 
-        public static List<Properties> GetModProperties()
+        /// <summary>
+        /// Get all mod properties and their paths to get information about possible collisions when saving. WARNING - ExampleMod folder will be ignored
+        /// </summary>
+        public static List<Properties> GetModProperties(out List<string> paths)
         {
 #if UNITY_EDITOR
-            return Extensions.FindGameObjectsByType<BaseMod>().Select(item => item.properties).ToList();
+            return Extensions.FindGameObjectsByType<BaseMod>(out paths).Select(item => item.properties).ToList();
 #endif
             // im just trying to fix one issue, ignore this duct tape solution
             return new List<Properties>();

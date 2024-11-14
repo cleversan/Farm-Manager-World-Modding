@@ -1,16 +1,12 @@
 #if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using FarmManagerWorld.Editors.Wizards;
 using System.IO;
 using System.Linq;
-using System.Drawing;
 using FarmManagerWorld.Static;
 using FarmManagerWorld.Modding.Mods;
 using FarmManagerWorld.Modding;
-using System;
 
 namespace FarmManagerWorld.Editors
 { 
@@ -173,11 +169,29 @@ namespace FarmManagerWorld.Editors
             }
 
             bool validation = true;
-            BaseMod mod = objectToCheck.GetComponent<BaseMod>();
-            if (mod != null && ModLoader.GetModProperties().Any(item => item.BasicType == mod.properties.BasicType && item.Name == mod.properties.Name))
+            BaseMod mod = objectToCheck.GetComponent<BaseMod>();            
+            if (mod != null)
             {
-                EditorUtility.DisplayDialog("Error", $"There is already a Mod object with name \"{mod.properties.Name}\" of type \"{mod.properties.BasicType}\" inside mod with ID \"{mod.properties.Mod.id}\"", "ok");
-                validation = false;
+                List<string> paths;
+                string collisionPaths = "";
+
+                List<Modding.ObjectProperties.Properties> modProperties = ModLoader.GetModProperties(out paths);
+                for(int modIndex = 0; modIndex < modProperties.Count; ++modIndex)
+                {
+                    if (paths[modIndex].Contains("Assets/ExampleMod")) // ignore example mods when searching for mod to be 
+                        continue;
+
+                    if (modProperties[modIndex].BasicType == mod.properties.BasicType && modProperties[modIndex].Name == mod.properties.Name)
+                        collisionPaths += $"\"{paths[modIndex]}\"\n";                
+                }
+
+                if (!string.IsNullOrEmpty(collisionPaths))
+                {
+                    EditorUtility.DisplayDialog("Error", $"There is already a Mod object with name \"{mod.properties.Name}\" of type \"{mod.properties.BasicType}\".\n" +
+                        $"Paths for colliding Mod objects: {collisionPaths}", "Ok");
+
+                    validation = false;
+                }                    
             }
 
             if (checkLOD) 

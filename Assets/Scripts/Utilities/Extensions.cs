@@ -208,6 +208,35 @@ public static class Extensions
         return result.ToArray();
     }
 
+    /// <summary>
+    /// Im just tired, so im gonna copy this random function so future reader, please forgive me
+    /// </summary>
+    public static T[] FindGameObjectsByType<T>(out List<string> paths) where T : MonoBehaviour
+    {
+        string[] temp = AssetDatabase.GetAllAssetPaths();
+        List<T> result = new List<T>();
+        paths = new List<string>();
+        foreach (string s in temp)
+        {
+            if (s.Contains(".prefab"))
+            {
+                UnityEngine.Object o = AssetDatabase.LoadMainAssetAtPath(s);
+                GameObject go = o as GameObject;
+                if (go != null)
+                {
+                    Component[] components = go.GetComponentsInChildren<Component>(true);
+                    if (go.GetComponentInChildren<T>() != null)
+                    {
+                        result.Add(go.GetComponentInChildren<T>());
+                        paths.Add(s);
+                    }
+                }
+            }
+        }
+
+        return result.ToArray();
+    }
+
     public static bool IsObjectVisible(this UnityEngine.Camera @this, Bounds bounds)
     {
         GameObject box = new GameObject();

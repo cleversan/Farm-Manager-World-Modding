@@ -2,11 +2,9 @@ using UnityEditor;
 using UnityEngine;
 using FarmManagerWorld.Modding.Mods;
 using FarmManagerWorld.Utils;
-using FarmManagerWorld.Editors.Wizards;
 using System.Linq;
 using FarmManagerWorld.Static;
 using FarmManagerWorld.Modding.ObjectProperties;
-using TMPro.EditorUtilities;
 
 namespace FarmManagerWorld.Editors
 {
@@ -53,8 +51,10 @@ namespace FarmManagerWorld.Editors
 
             if (GUILayout.Button("Check if collider is valid"))
             {
-                editor.IsColliderSizeGood4(editor.machine.parkingSpaceCollider.size);
+                if (!editor.IsColliderSizeGood4(editor.machine.parkingSpaceCollider.size))
+                    editor.CorrectColliderSize4(editor.machine.parkingSpaceCollider.size);
             }
+
             GUILayout.EndHorizontal();
 
             GUILayout.Space(10);           
