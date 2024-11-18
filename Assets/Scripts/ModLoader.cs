@@ -369,6 +369,7 @@ namespace FarmManagerWorld.Modding
             return Extensions.FindGameObjectsByType<BaseMod>(out paths).Select(item => item.properties).ToList();
 #endif
             // im just trying to fix one issue, ignore this duct tape solution
+            paths = new List<string>();
             return new List<Properties>();
         }
 

@@ -1,6 +1,7 @@
+#if UNITY_EDITOR
 using FarmManagerWorld.Editors;
+#endif
 using FarmManagerWorld.Modding.ObjectProperties;
-using FarmManagerWorld.Translations;
 using FarmManagerWorld.Utils;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,9 +83,10 @@ namespace FarmManagerWorld.Modding.Mods
                 return false;
             }
 
+#if UNITY_EDITOR
             if (TryGetComponent(out MachineEditor machineEditor))            
-                machineEditor.CorrectColliderSize4(parkingSpaceCollider.size);  
-
+                machineEditor.CorrectColliderSize4(parkingSpaceCollider.size);
+#endif
             return baseMachine.ValidateProperties();
         }
     }
