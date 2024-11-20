@@ -298,6 +298,15 @@ namespace FarmManagerWorld.Static
             "seederforplantingcreals"
         };
 
+        public static string[] AllowedBushShaderNames =
+        {
+            "Farm Manager World/PlantCutout",
+            "Farm Manager World/PlantCutoutNoWind"
+        };
 
+        public static string[] AllowedGrainShaderNames =
+        {
+            "Farm Manager World/GrainWithWindInstanced"
+        };
     }
 }

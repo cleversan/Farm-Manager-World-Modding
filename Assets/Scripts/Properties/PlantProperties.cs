@@ -315,9 +315,8 @@ namespace FarmManagerWorld.Modding.ObjectProperties
     public class GrowingStateProperties
     {
         /// <summary>
-        /// When does GrowingState starts taking effect, used in calculation of the plant scale based on the statement:
-        /// Mathf.Clamp(Growth - state.Start + state.Offset, 0, state.End - state.Start) * state.Multiplier.
-        /// This will only take effect in the axis that has GrowScale marked as true
+        /// When does GrowingState starts taking effect. Both Start and End are expressed in [0, 1] range, 
+        /// where 1 means 100% Growth/fully grown Plant
         /// </summary>
         public float Start = 0f;
 
@@ -325,16 +324,6 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         /// Used in scaling, refer to Start for more information
         /// </summary>
         public float End = 1f;
-
-        /// <summary>
-        /// Used in scaling, refer to Start for more information
-        /// </summary>
-        public float Offset = 0;
-
-        /// <summary>
-        /// Used in scaling, refer to Start for more information
-        /// </summary>
-        public float Multiplier = 1f;
 
         /// <summary>
         /// List of MeshFilters that will be used when displaying plant

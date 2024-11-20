@@ -10,9 +10,6 @@ using UnityEngine;
 using System.Linq;
 using FarmManagerWorld.Static;
 using FarmManagerWorld.Utils;
-using UnityEditor.TerrainTools;
-using System.ComponentModel.Composition.Primitives;
-using UnityEditor.Experimental.GraphView;
 
 namespace FarmManagerWorld.Editors.Wizards
 {
@@ -68,6 +65,7 @@ namespace FarmManagerWorld.Editors.Wizards
                     if (!Directory.Exists(Path.Combine(FolderPath, folder)))
                     {
                         Directory.CreateDirectory(Path.Combine(FolderPath, folder));
+                        AssetDatabase.Refresh();
                     }
                 }
                 catch (IOException ex)

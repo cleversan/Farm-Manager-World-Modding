@@ -137,7 +137,7 @@ namespace FarmManagerWorld.Editors.Wizards
             {
                 if (GUILayout.Button(build))
                 {
-                    BuildingWizard window = (BuildingWizard)Activator.CreateInstance(BuildingWizardTypes[build], new object[] { });
+                    BuildingWizard window = (BuildingWizard)ScriptableObject.CreateInstance(BuildingWizardTypes[build]);
 
                     window.type = (StaticInformation.BuildingEnums)System.Enum.Parse(typeof(StaticInformation.BuildingEnums), build);
                     window.Show();

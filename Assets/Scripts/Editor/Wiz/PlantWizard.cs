@@ -59,15 +59,12 @@ namespace FarmManagerWorld.Editors.Wizards
         public PlantMod MainObject;
 
         [Range(0.0f, 1.0f)]
-        [Header("When does GrowingState starts taking effect, \n" +
-            "used in calculation of the plant scale based on the statement:\n" +
-            "Mathf.Clamp(Growth - state.Start + state.Offset, 0, state.End - state.Start) * state.Multiplier.\n" +
-            "This will only take effect in the axis that has GrowScale marked as true")]
+        [Header("When does GrowingState starts taking effect. \n" +
+            "Both Start and End are expressed in [0, 1] range, \n" +
+            "where 1 means 100% Growth/fully grown Plant.\n")]
         public float Start = 0f;
         [Range(0.0f, 1.0f)]
         public float End = 1f;
-        public float Offset = 0;
-        public float Multiplier = 1f;
         [Header("Object that will be affected by this Growth State \n(will still be affected by other scaling measures)")]
         public GameObject[] Objects;
 
@@ -90,8 +87,6 @@ namespace FarmManagerWorld.Editors.Wizards
             {
                 Start = Start,
                 End = End,
-                Offset = Offset,
-                Multiplier = Multiplier,
                 Objects = Objects,
                 FruitMesh = FruitMesh,
                 FruitsDumies = FruitsDummies,

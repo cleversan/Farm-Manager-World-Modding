@@ -1,56 +1,52 @@
-﻿Shader "Farm Manager World/PlantCutout"
+Shader "Farm Manager World/GrainWithWindInstanced"
 {
 	Properties
 	{
-		_MainTex("Texture", 2D) = "white" {}
+		_MainTex("Main (RGBA)", 2D) = "white" {}
 		_YoungTex("Young (RGBA)", 2D) = "white" {}
 		_HarvestTex("Harvest (RGBA)", 2D) = "white" {}
 		_OverripingTex("Overriping (RGBA)", 2D) = "white" {}
 		_Grow("Grow", Range(0,1)) = 1
+		_Overriping("Overriping", Range(0,1)) = 0
+		_Bias0("Show Bias", Range(0,1)) = 0.3
 		_Bias1("Stage Seedling Bias", Range(0,1)) = 0.4
 		_Bias2("Stage Blossom Bias", Range(0,1)) = 0.55
 		_Bias3("Stage Harvest Bias", Range(0,1)) = 0.85
 
-		_Cutoff("Base Alpha cutoff", Range(0,.9)) = .5
+		_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
 
-		_Overriping("Overriping", Range(0,1)) = 0
 		_ShakeDisplacement("Displacement", Range(0, 1.0)) = 0
 		_ShakeTime("Shake Time", Range(0, 1.0)) = 0.5
 		_ShakeBending("Shake Bending", Range(0, 1.0)) = 0
-
 		_WindMultiplier("Wind multiplier", Range(0,1)) = 1
-
-		_TileMultiplier("Tile multiplier", Range(0,20)) = 0
 	}
-		
+
 	SubShader
 	{
-		Tags{ "Queue" = "AlphaTest+100" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout" }
+		Tags{ "Queue" = "AlphaTest" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout" }
 		LOD 200
 
 		CGPROGRAM
 		#pragma target 4.0
-		#pragma surface surf Lambert alphatest:_Cutoff halfasview vertex:vert addshadow
+		#pragma surface surf Lambert alphatest:_Cutoff vertex:vert addshadow halfasview 
 		#pragma multi_compile_instancing
 		#pragma instancing_options procedural:setup
 		#include "UnityCG.cginc"
-
-		struct Input 
-		{
-			float2 uv_MainTex;
-			float2 Grow;
-			float4 Color;
-		};
 
 		struct appdata_full2
 		{
 			float4 vertex    : POSITION;
 			float3 normal    : NORMAL;
 			float4 texcoord  : TEXCOORD0;
-			float4 color     : COLOR;
 			UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
-							
+
+		struct Input {
+			float2 uv_MainTex;
+			float2 Grow;
+			float4 Color;
+		};
+
 	#ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
         StructuredBuffer<float4x4> positionBuffer;
         StructuredBuffer<float2> growBuffer;
@@ -87,34 +83,32 @@
 			return transpose(cofactors) / determinant(input);
 		}
 
-		void setup()
-		{
-		#ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
-
-			float4x4 data = positionBuffer[unity_InstanceID];
-
-			unity_ObjectToWorld = data;
-			unity_WorldToObject = inverse(unity_ObjectToWorld);
-
-		#endif
-		}
-
+		sampler2D _MainTex;
+		sampler2D _YoungTex;
+		sampler2D _HarvestTex;
+		sampler2D _OverripingTex;
 		float _ShakeDisplacement;
 		float _ShakeTime;
 		float _ShakeWindspeed;
 		float _ShakeBending;
+		float _Grow;
 		float _Overriping;
-
-		sampler2D _MainTex;
-		sampler2D _OverripingTex;
-		sampler2D _YoungTex;
-		sampler2D _HarvestTex;
+		float _Bias0;
 		float _Bias1;
 		float _Bias2;
 		float _Bias3;
-		float _Grow;
 		float _WindMultiplier;
-		float _TileMultiplier;
+
+        void setup()
+        {
+		#ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
+            float4x4 data = positionBuffer[unity_InstanceID];
+
+            unity_ObjectToWorld = data;
+			unity_WorldToObject = inverse(unity_ObjectToWorld);
+
+		#endif
+        }
 
 		void FastSinCos(float4 val, out float4 s, out float4 c) 
 		{
@@ -131,12 +125,20 @@
 			s = val + r1 * sin7.y + r2 * sin7.z + r3 * sin7.w;
 			c = 1 + r5 * cos8.x + r6 * cos8.y + r7 * cos8.z + r8 * cos8.w;
 		}
-
+			
 		void vert(inout appdata_full2 v, out Input o) 
 		{
-			float factor = (1 - _ShakeDisplacement - v.color.r) * 0.5;
+		#ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
+			o.Grow = growBuffer[unity_InstanceID];
+			o.Color = colorBuffer[unity_InstanceID];
+		#else
+			o.Grow = fixed2(_Grow,1);
+			o.Color = float4(1,1,1,1);
+		#endif
 
-			const float _WindSpeed = (_ShakeWindspeed * 2 + v.color.g);
+			float factor = (1 - _ShakeDisplacement - o.Color.r) * 0.5;
+
+			const float _WindSpeed = (_ShakeWindspeed * 2 + o.Color.g);
 
 			const float4 _waveXSize = float4(0.048, 0.06, 0.24, 0.096);
 			const float4 _waveZSize = float4 (0.024, .08, 0.08, 0.2);
@@ -149,13 +151,13 @@
 			waves = v.vertex.x * _waveXSize;
 			waves += v.vertex.z * _waveZSize;
 
-			waves += _Time.x * (1 - _ShakeTime * 2 - v.color.b) * waveSpeed *_WindSpeed * _WindMultiplier;
+			waves += _Time.x * (1 - _ShakeTime * 2 - o.Color.b) * waveSpeed *_WindSpeed * _WindMultiplier;
 
 			float4 s, c;
 			waves = frac(waves);
-			FastSinCos(waves, s, c);
+			FastSinCos(waves, s,c);
 
-			float waveAmount = v.texcoord.y * (v.color.a + _ShakeBending);
+			float waveAmount = v.texcoord.y * (o.Color.a + _ShakeBending);
 			s *= waveAmount;
 
 			s *= normalize(waveSpeed);
@@ -163,43 +165,29 @@
 			s = s * s;
 			float fade = dot(s, 1.3);
 			s = s * s;
-			float3 waveMove = float3 (0, 0, 0);
+			float3 waveMove = float3 (0,0,0);
 			waveMove.x = dot(s, _waveXmove);
 			waveMove.z = dot(s, _waveZmove);
 
 			v.vertex.xz -= mul((float3x3)UNITY_MATRIX_MVP, waveMove).xz;
-
-			#ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
-
-			o.Grow = growBuffer[unity_InstanceID];
-			o.Color = colorBuffer[unity_InstanceID];
-
-			#else
-
-			o.Grow = fixed2(_Grow,1);
-			o.Color = v.color;
-
-			#endif
 
 			o.uv_MainTex = v.texcoord;
 		}
 
 		void surf(Input IN, inout SurfaceOutput o) 
 		{
-			half4 color;
-			
+			clip(IN.Grow.y - IN.uv_MainTex.y);
+			clip(IN.Grow.x - IN.uv_MainTex.y);
+			clip(IN.Grow.x - _Bias0);
+
 			float _Grow = IN.Grow.x;
-
-			float2 uv = IN.uv_MainTex;
-
-			uv.x = uv.x + uv.x * _TileMultiplier * (1-_Grow);
-			uv.x = uv.x + IN.Color.a;
-
+			float2 uv = float2(IN.uv_MainTex.x, IN.uv_MainTex.y / _Grow);
+			half4 color;
 			color = lerp(tex2D(_YoungTex, uv), tex2D(_MainTex, uv), clamp((_Grow - _Bias1) / (1 - _Bias1) / _Bias2, 0, 1));
-			color = lerp(color, tex2D(_HarvestTex, uv), clamp((_Grow - _Bias3) / (1 - _Bias3), 0, 1));
+			color = lerp(color, tex2D(_HarvestTex, uv), clamp((_Grow - _Bias3) / (1 - _Bias3), 0,1));
 			color = lerp(color, tex2D(_OverripingTex, uv), _Overriping);
 
-			o.Albedo = color.rgb * IN.Color;
+			o.Albedo = color * IN.Color;
 			o.Alpha = color.a;
 		}
 		ENDCG
