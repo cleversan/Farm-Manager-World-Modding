@@ -1,6 +1,6 @@
 using System;
 using System.Xml.Serialization;
-using FarmManagerWorld.Editors;
+using FarmManagerWorld.Modding.Mods;
 using UnityEngine;
 
 namespace FarmManagerWorld.Modding.ObjectProperties
@@ -64,9 +64,9 @@ namespace FarmManagerWorld.Modding.ObjectProperties
                 {
                     SeedProductionProperties.ResourceProducedName = Name;
 
-                    if (plant != null && plant.TryGetComponent(out PlantEditor editor))
+                    if (plant != null && plant.TryGetComponent(out PlantMod plantMod))
                     {
-                        SeedProductionProperties.ResourceNeededName = editor.foliageResourceMod.Resource.Name;
+                        SeedProductionProperties.ResourceNeededName = plantMod.Plant.FoliageName;
 
                         if (SeedProductionProperties.ResourceProducedAmount <= 0)
                         {

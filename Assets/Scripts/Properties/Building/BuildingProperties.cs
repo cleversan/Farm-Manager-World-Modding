@@ -58,7 +58,8 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         public List<int> RequiredTraining = new List<int>();
 
         /// <summary>
-        /// Trainings that building will use for certain actions or upgrades like storage expansion or cooler upgrade. Refer to documentation for specific information.
+        /// Trainings that building will use for certain actions or upgrades like Storage Space Optimization (ID: 43) or Regrigeration Systems (ID: 44). 
+        /// Please refer to training section of documentation for more information 
         /// </summary>
         public List<int> AdditionalTraining = new List<int>();
 
