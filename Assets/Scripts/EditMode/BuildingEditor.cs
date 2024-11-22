@@ -10,7 +10,7 @@ namespace FarmManagerWorld.Editors
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(BuildingMod))]
-    public class BuildingEditor : MonoBehaviour
+    public class BuildingEditor : SaveableEditor
     {
         public BuildingMod building;
         public GameObject doorObject;
@@ -624,6 +624,8 @@ namespace FarmManagerWorld.Editors
                 Gizmos.color = new Color32(255, 55, 55, 125);
                 foreach (var point in animalSpawnPoints)
                 {
+                    Vector3 labelPos = point.transform.position + Vector3.up;
+                    Handles.Label(labelPos, "Animal Spawn");
                     var boxCollider = point.GetComponent<BoxCollider>();
                     if (boxCollider != null)
                         Gizmos.DrawCube(point.transform.position, boxCollider.size);

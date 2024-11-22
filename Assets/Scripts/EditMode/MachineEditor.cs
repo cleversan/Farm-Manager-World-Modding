@@ -12,7 +12,7 @@ namespace FarmManagerWorld.Editors
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(MachineBaseMod))]
-    public class MachineEditor : MonoBehaviour
+    public class MachineEditor : SaveableEditor
     {
         public MachineBaseMod machine;
 

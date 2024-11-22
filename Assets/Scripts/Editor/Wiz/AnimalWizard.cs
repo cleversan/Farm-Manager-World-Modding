@@ -18,6 +18,7 @@ namespace FarmManagerWorld.Editors.Wizards
         public Vector2 reproductionPerYear = new Vector2(1, 1);
         public string asResourceName;
         public float productionAge = 2;
+        public float maxAge = 12;
         public bool isHidden = false;
         public List<string> allowedFoodPaths;
         public float maxFoodAmountPerFeed = 3;
@@ -64,6 +65,7 @@ namespace FarmManagerWorld.Editors.Wizards
                 ReproductionPerYear = reproductionPerYear,
                 AsResourceName = asResourceName,
                 ProductionAge = productionAge,
+                MaxAge = maxAge,
                 IsHidden = isHidden,
                 AllowedFood = allowedFoodPaths,
                 MaxFoodAmountPerFeed = maxFoodAmountPerFeed,

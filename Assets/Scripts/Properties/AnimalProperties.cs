@@ -1,7 +1,6 @@
 using System;
 using System.Xml.Serialization;
 using UnityEngine;
-using FarmManagerWorld.Utils;
 using System.Collections.Generic;
 
 namespace FarmManagerWorld.Modding.ObjectProperties
@@ -19,7 +18,7 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         /// MeanStaffSkill * 0.5f + AssignedStaffCount / <see cref="BuildingProperties.MaxAssignedStaffCount"/>
         /// </summary>
         [Header("General gameplay properties")]
-		public float SicknessChance;
+		public float SicknessChance = 0.01f;
 
 		/// <summary>
 		/// Defines what kind of animation will Staff play during treatment
@@ -45,10 +44,15 @@ namespace FarmManagerWorld.Modding.ObjectProperties
 		/// </summary>
 		public float ProductionAge;
 
-		/// <summary>
-		/// Defines if animal should be visible in world. For instance, fish are not visible (have IsHidden set to true)
-		/// </summary>
-		public bool IsHidden;
+        /// <summary>
+        /// Defines Animal when animal dies from old age. 1 means 1 year, 2 means 2 years etc. To get value in days divide Days/365
+        /// </summary>
+        public float MaxAge;
+
+        /// <summary>
+        /// Defines if animal should be visible in world. For instance, fish are not visible (have IsHidden set to true)
+        /// </summary>
+        public bool IsHidden;
 
 		/// <summary>
 		/// Array of resources that are food for this animal. See also <seealso cref="ResourceProperties.FoodQuality"/>
@@ -159,6 +163,18 @@ namespace FarmManagerWorld.Modding.ObjectProperties
 			{
 				Debug.LogError($"Production list at Animal {Name} cannot be empty, validation failed");
                 validation = false;
+			}
+
+			if (ProductionAge >= MaxAge)
+			{
+                Debug.LogError($"ProductionAge ({ProductionAge}) is greater then MaxAge({MaxAge}) at {Name}, animals will die when they become an adult, validation failed");
+                validation = false;
+            }
+
+			if (SicknessChance > 0.2)
+			{
+				Debug.Log($"SicknessChance was greater then 0.2 or 20% ({SicknessChance} or {(int)(SicknessChance * 100)}%)");
+				SicknessChance = Mathf.Clamp(SicknessChance, 0, 0.2f);
 			}
 
 			for (int i = 0; i < Production.Count; ++i)

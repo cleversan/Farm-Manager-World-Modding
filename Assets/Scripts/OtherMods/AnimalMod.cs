@@ -22,7 +22,7 @@ namespace FarmManagerWorld.Modding.Mods
             bool validation = true;
             if (animalBones == null)
             {
-                Debug.LogError("AnimalBoxes cannot be null, validation failed");
+                Debug.LogError("AnimalBones cannot be null, validation failed");
                 validation = false;
             }
 

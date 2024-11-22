@@ -8,8 +8,8 @@ namespace FarmManagerWorld.Editors
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(PlantMod))]
-    public class PlantEditor : MonoBehaviour
-    {
+    public class PlantEditor : SaveableEditor
+    {        
         public PlantMod plantMod;
         public SeedResourceMod seedResourceMod;
         public FoliageResourceMod foliageResourceMod;

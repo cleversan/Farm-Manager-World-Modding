@@ -7,7 +7,7 @@ namespace FarmManagerWorld.Editors
 {
     [RequireComponent(typeof(ResourceMod))]
     [ExecuteInEditMode]
-    public class ResourceEditor : MonoBehaviour
+    public class ResourceEditor : SaveableEditor
     {
         public ResourceMod resourceMod;
 

@@ -11,6 +11,7 @@ namespace FarmManagerWorld.Modding.ObjectProperties
 	[XmlRoot(ElementName = "AnimalAsResource")]
 	public class AnimalAsResourceProperties : ResourceProperties
 	{
+        [Space(10)]
 		/// <summary>
 		/// Sprite of young animal variant
 		/// </summary>
@@ -26,7 +27,7 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         /// Defines production values for this seed resource in Plant Factory that will be autopatched.
         /// </summary>
         public ProductionProperties SlaughterhouseProductionProperties;
-
+        
         public override bool ValidateProperties()
         {
             bool validation = true;

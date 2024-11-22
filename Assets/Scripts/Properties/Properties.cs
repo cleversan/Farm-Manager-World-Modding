@@ -17,6 +17,7 @@ namespace FarmManagerWorld.Modding.ObjectProperties
 		/// Reference to mod its assigned to
 		/// </summary>
 		[XmlIgnore]
+		[HideInInspector]
 		public Mod Mod;
 
 		/// <summary>

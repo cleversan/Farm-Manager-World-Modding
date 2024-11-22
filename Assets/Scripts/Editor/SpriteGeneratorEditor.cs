@@ -33,7 +33,7 @@ namespace FarmManagerWorld.Editors
             "South America"             // 3
         };
 
-        private void OnEnable()
+        public override void OnEnable()
         {
             spriteGenerator = target as SpriteGenerator;
             spriteGenerator.MainCamera = Camera.main;
@@ -81,7 +81,7 @@ namespace FarmManagerWorld.Editors
                 }
             }
 
-            if (string.IsNullOrEmpty(modID))
+            if (string.IsNullOrEmpty(_modID))
             {
                 GUILayout.Label("Select mod before rendering");
                 return;
@@ -93,7 +93,7 @@ namespace FarmManagerWorld.Editors
                 {
                     List<GameObject> objectsToRender;
                     List<string> objectNames;
-                    Mod renderMod = ModLoader.GetMods().FirstOrDefault(item => item.id == modID);
+                    Mod renderMod = ModLoader.GetMods().FirstOrDefault(item => item.id == _modID);
                     spriteGenerator.GetObjectsToRender(
                         renderMod, 
                         renderMachines, 

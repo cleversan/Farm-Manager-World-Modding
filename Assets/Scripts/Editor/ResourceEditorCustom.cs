@@ -18,8 +18,9 @@ namespace FarmManagerWorld.Editors
         private string _sowingMachineTag = "";
         private int _selectedSowingMachineIndex = -1;
 
-        void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             editor = (ResourceEditor)target;
         }
 
@@ -54,8 +55,8 @@ namespace FarmManagerWorld.Editors
                 
                 if (GUILayout.Button("Finalize for asset bundle"))
                 {
-                    if (editor.resourceMod.Validate() && CheckMod(editor.gameObject, modID, false, true))
-                        FinalizeForAssetBundle(editor, editor.gameObject, modID, "resources");
+                    if (editor.resourceMod.Validate() && CheckMod(editor.gameObject, _modID, false, true))
+                        FinalizeForAssetBundle(editor, editor.gameObject, _modID, "resources");
                 }
             }
         }

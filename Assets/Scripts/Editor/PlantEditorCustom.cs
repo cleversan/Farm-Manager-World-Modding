@@ -14,10 +14,6 @@ namespace FarmManagerWorld.Editors
     public class PlantEditorCustom : SaveableEditorCustom
     {
         public PlantEditor editor;
-        private void OnEnable()
-        {
-            editor = target as PlantEditor;
-        }
 
         private bool _customHarvestingMachine = false;
         private int _harvestingMachineIndex = -1;
@@ -30,22 +26,31 @@ namespace FarmManagerWorld.Editors
         private bool _customBallingMachine = false;
         private int _ballingMachineIndex = -1;
         private string _ballingMachineTag = "";
+               
+        public override void OnEnable()
+        {
+            base.OnEnable();
+            editor = target as PlantEditor;
+        }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
             ModPopup();
 
             if (Application.isPlaying)
             {
+
+                GUILayout.Space(20);
                 if (editor.plantMod.model != null)
                 {
                     if (GUILayout.Button("Visualise plant"))
                         editor.Visualise();   
                 }
                 else                
-                    GUILayout.Label("Assign \"Model\" in PlantMod component to visualise plant");                
+                    GUILayout.Label("Assign \"Model\" in PlantMod component to visualise plant");
+
+                GUILayout.Space(20);
             }
             else
             {
@@ -120,21 +125,22 @@ namespace FarmManagerWorld.Editors
                     }
                 }
 
-                GUILayout.Label("Plant visualisation available in play mode");                 
+                GUILayout.Space(20);
+                GUILayout.Label("Plant visualisation available in play mode");;
             }
 
             if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
             {
                 bool plantValidated, seedResourceValidated, foliageResourceValidated;
-                plantValidated = editor.plantMod.Validate() && CheckMod(editor.gameObject, modID, false, true);
-                seedResourceValidated = editor.seedResourceMod != null && editor.seedResourceMod.Validate() && CheckMod(editor.seedResourceMod.gameObject, modID, false, false);
-                foliageResourceValidated = editor.foliageResourceMod != null && editor.foliageResourceMod.Validate() && CheckMod(editor.foliageResourceMod.gameObject, modID, false, false);
+                plantValidated = editor.plantMod.Validate() && CheckMod(editor.gameObject, _modID, false, true);
+                seedResourceValidated = editor.seedResourceMod != null && editor.seedResourceMod.Validate() && CheckMod(editor.seedResourceMod.gameObject, _modID, false, false);
+                foliageResourceValidated = editor.foliageResourceMod != null && editor.foliageResourceMod.Validate() && CheckMod(editor.foliageResourceMod.gameObject, _modID, false, false);
 
                 if (plantValidated && seedResourceValidated && foliageResourceValidated)
                 {
-                    FinalizeForAssetBundle(editor.seedResourceMod.GetComponent<ResourceEditor>(), editor.seedResourceMod.gameObject, modID, "resources");
-                    FinalizeForAssetBundle(editor.foliageResourceMod.GetComponent<ResourceEditor>(), editor.foliageResourceMod.gameObject, modID, "resources");
-                    FinalizeForAssetBundle(editor, editor.gameObject, modID, "plants");
+                    FinalizeForAssetBundle(editor.seedResourceMod.GetComponent<ResourceEditor>(), editor.seedResourceMod.gameObject, _modID, "resources");
+                    FinalizeForAssetBundle(editor.foliageResourceMod.GetComponent<ResourceEditor>(), editor.foliageResourceMod.gameObject, _modID, "resources");
+                    FinalizeForAssetBundle(editor, editor.gameObject, _modID, "plants");
                 }
             }
         }

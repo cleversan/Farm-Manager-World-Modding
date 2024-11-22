@@ -6,7 +6,7 @@ namespace FarmManagerWorld.Editors
 {
     [RequireComponent(typeof(AnimalMod))]
     [ExecuteInEditMode]
-    public class AnimalEditor : MonoBehaviour
+    public class AnimalEditor : SaveableEditor
     {
         public AnimalMod animalMod;
         public ResourceMod animalAsResource;

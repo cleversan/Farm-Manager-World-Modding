@@ -25,8 +25,9 @@ namespace FarmManagerWorld.Editors
         private string _vehicleTagToAdd;
 
 
-        void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             editor = (MachineEditor)target;
             isMachine = editor.machine is not VehicleMod;
         }       
@@ -150,8 +151,8 @@ namespace FarmManagerWorld.Editors
             GUILayout.Space(20);
             if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
             {
-                if (editor.machine.Validate() && CheckMod(editor.gameObject, modID, true, true) && CheckForStaffSockets())
-                    FinalizeForAssetBundle(editor, editor.gameObject, modID, "machines");
+                if (editor.machine.Validate() && CheckMod(editor.gameObject, _modID, true, true) && CheckForStaffSockets())
+                    FinalizeForAssetBundle(editor, editor.gameObject, _modID, "machines");
             }
         }
 

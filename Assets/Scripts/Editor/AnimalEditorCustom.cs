@@ -10,21 +10,23 @@ namespace FarmManagerWorld.Editors
     {
         public AnimalEditor editor;
 
-        void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             editor = (AnimalEditor)target;
         }
 
         public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
             ModPopup();
 
             if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
             {
-                if (editor.animalMod.Validate() && editor.animalAsResource.Validate() && CheckMod(editor.gameObject, modID, false, true))
+                if (editor.animalMod.Validate() && editor.animalAsResource.Validate() && CheckMod(editor.gameObject, _modID, false, true))
                 {
-                    FinalizeForAssetBundle(editor.animalAsResource.GetComponent<ResourceEditor>(), editor.animalAsResource.gameObject, modID, "resources");
-                    FinalizeForAssetBundle(editor, editor.gameObject, modID, "animals");
+                    FinalizeForAssetBundle(editor.animalAsResource.GetComponent<ResourceEditor>(), editor.animalAsResource.gameObject, _modID, "resources");
+                    FinalizeForAssetBundle(editor, editor.gameObject, _modID, "animals");
                 }
             }
         }

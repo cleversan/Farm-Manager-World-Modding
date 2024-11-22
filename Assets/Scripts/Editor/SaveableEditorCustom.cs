@@ -7,13 +7,30 @@ using System.Linq;
 using FarmManagerWorld.Static;
 using FarmManagerWorld.Modding.Mods;
 using FarmManagerWorld.Modding;
+using System;
 
 namespace FarmManagerWorld.Editors
 { 
     public class SaveableEditorCustom : Editor
     {
-        protected int _selectedMod = 0;
-        protected string modID = "";
+        [HideInInspector] protected SaveableEditor saveableEditor;
+        
+        protected string _modID
+        {
+            get { return saveableEditor.ModID; }
+            set { saveableEditor.ModID = value;}
+        }
+
+        protected int _selectedMod
+        {
+            get { return saveableEditor.SelectedMod; }
+            set { saveableEditor.SelectedMod = value; }
+        }
+
+        public virtual void OnEnable()
+        {
+            saveableEditor = target as SaveableEditor;
+        }
 
         protected void FinalizeForAssetBundle(MonoBehaviour editor, GameObject modObject, string modName, string folderName, StaticInformation.Region region = StaticInformation.Region.None)
         {
@@ -62,13 +79,15 @@ namespace FarmManagerWorld.Editors
 
         protected void ModPopup(string header = "Mod for compilation")
         {
+            GUILayout.Space(10);
             EditorGUI.BeginChangeCheck();
             string[] _options = ModLoader.GetMods().Select(item => item.id).ToArray();
-            _selectedMod = EditorGUILayout.Popup(header, _selectedMod, _options);
+            saveableEditor.SelectedMod = EditorGUILayout.Popup(header, saveableEditor.SelectedMod, _options);
             if (_selectedMod > -1)
-                modID = _options[_selectedMod];
+                _modID = _options[_selectedMod];
 
             EditorGUI.EndChangeCheck();
+            GUILayout.Space(10);
         }
 
         protected void AddTagToString(ref string tagToAdd, ref string stringWithTags, ref int index, bool replaceTag)
@@ -164,7 +183,7 @@ namespace FarmManagerWorld.Editors
         {
             if (checkMod && string.IsNullOrEmpty(modID))
             {
-                EditorUtility.DisplayDialog("Error", "You have to choose a mod", "ok");
+                EditorUtility.DisplayDialog("Error", "You have to choose a mod, search for \"Mod for compilation\" Dropdown in this component", "Ok");
                 return false;
             }
 

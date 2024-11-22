@@ -122,7 +122,6 @@ namespace FarmManagerWorld.Modding.ObjectProperties
             bool baseValidation = base.ValidateProperties();
             return baseValidation && validation;
         }
-
     }
 
 	/// <summary>

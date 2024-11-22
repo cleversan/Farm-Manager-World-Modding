@@ -92,26 +92,14 @@ namespace FarmManagerWorld.Editors.Wizards
 
         private void OnWizardUpdate()
         {
-            if (Title == "" || Author == "" || About == "" || Version == "")
-            {
-                isValid = false;
-            }
-            else
-            {
-                isValid = true;
-            }
+            isValid = !(string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Author) || string.IsNullOrEmpty(Version));
         }
+
         private void OnEnable()
         {
-            //FolderPath = EditorUtility.OpenFolderPanel("folder in which you want mod", Path.Combine(Application.dataPath, "Mods"), "");
             data.Add("animals"); data.Add("assets"); data.Add("buildings");
             data.Add("meshes"); data.Add("plants"); data.Add("resources");
             data.Add("textures"); data.Add("machines"); data.Add("plantFull");
-        }
-
-        private void OnWizardOtherButton()
-        {
-            //FolderPath = EditorUtility.OpenFolderPanel("folder in which you want mod", Path.Combine(Application.dataPath, "Mods"), "");
         }
 
         private void Update()
@@ -143,6 +131,7 @@ namespace FarmManagerWorld.Editors.Wizards
             EditorGUILayout.LabelField("Select mod you want to save");
             EditorGUI.BeginChangeCheck();
             string[] _options = ModLoader.GetMods().Select(item => item.id).ToArray();
+            bool canCompile = true;
             _selectedMod = EditorGUILayout.Popup("Mod", _selectedMod, _options);
             if (_selectedMod > -1)
                 modName = _options[_selectedMod];
@@ -179,13 +168,29 @@ namespace FarmManagerWorld.Editors.Wizards
                 {
                     previewImage = (Sprite)EditorGUILayout.ObjectField(previewImage, typeof(Sprite), false);
                     if (previewImage != null && !previewImage.texture.isReadable)
+                    {
                         EditorGUILayout.LabelField("SELECTED SPRITE \nIS NOT READABLE", GUILayout.ExpandHeight(true));
+                        canCompile = false;
+                    }
+                    
+                    if (string.IsNullOrEmpty(modName))
+                    {
+                        canCompile = false;
+                        EditorGUILayout.LabelField("Select mod before compilation", GUILayout.ExpandHeight(true));
+                    }
+
+                    if (!Directory.Exists(ModPath))
+                    {
+                        canCompile = false;
+                        EditorGUILayout.LabelField("Directory at Mod path does not exist", GUILayout.ExpandHeight(true));
+                    }
                 }
                 EditorGUILayout.EndVertical();
             }
-            EditorGUILayout.EndHorizontal();
 
-            if (Directory.Exists(ModPath) && previewImage != null && previewImage.texture.isReadable && GUILayout.Button("Compile", GUILayout.ExpandHeight(true)))            
+            EditorGUILayout.EndHorizontal();        
+
+            if (canCompile && GUILayout.Button("Compile", GUILayout.ExpandHeight(true)))            
                 OnWizardCreate();           
         }
 
@@ -212,6 +217,7 @@ namespace FarmManagerWorld.Editors.Wizards
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 GameObject obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+
                 #region Checking validation
 
                 string assetBundleImplicitName = "";

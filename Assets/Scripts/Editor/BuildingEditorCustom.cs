@@ -20,8 +20,9 @@ namespace FarmManagerWorld.Editors
     {
         public BuildingEditor editor;
 
-        void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             editor = (BuildingEditor)target;
         }
 
@@ -141,13 +142,13 @@ namespace FarmManagerWorld.Editors
 
             if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
             {
-                if (editor.building.Validate() && CheckMod(editor.gameObject, modID, true, true) && CheckRegionalBuildings())
+                if (editor.building.Validate() && CheckMod(editor.gameObject, _modID, true, true) && CheckRegionalBuildings())
                 {
                     var regionalModels = editor.building.GetComponentsInChildren<RegionalModelMod>(true);
                     for (int i = regionalModels.Length - 1; i >= 0; i--)
-                        FinalizeForAssetBundle(null, regionalModels[i].gameObject, modID, "buildings", regionalModels[i].Region);
+                        FinalizeForAssetBundle(null, regionalModels[i].gameObject, _modID, "buildings", regionalModels[i].Region);
 
-                    FinalizeForAssetBundle(editor, editor.gameObject, modID, "buildings");
+                    FinalizeForAssetBundle(editor, editor.gameObject, _modID, "buildings");
                 }
             }
         }
