@@ -54,10 +54,11 @@ namespace FarmManagerWorld.Editors.Wizards
                     if (region == StaticInformation.Region.None)
                         continue;
 
-                    GameObject regionObject = LODsGenerator.GenerateEmptyLOD(numberOfLods, createEmptyLODs);
+                    RegionalModelMod regionObject = LODsGenerator.GenerateEmptyLOD(numberOfLods, createEmptyLODs).AddComponent<RegionalModelMod>();
                     regionObject.name = $"{Name}{region}";
-                    regionObject.AddComponent<RegionalModelMod>().parentBuildingName = Name;
-                    regionObject.GetComponent<RegionalModelMod>().Region = region;
+                    regionObject.RegionalModel = (RegionalModelProperties)Activator.CreateInstance(typeof(RegionalModelProperties));
+                    regionObject.RegionalModel.Name = Name;
+                    regionObject.RegionalModel.Region = region;
                     regionObject.transform.SetParent(modObject.transform);
                 }
             }

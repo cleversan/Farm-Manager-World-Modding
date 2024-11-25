@@ -146,7 +146,7 @@ namespace FarmManagerWorld.Editors
                 {
                     var regionalModels = editor.building.GetComponentsInChildren<RegionalModelMod>(true);
                     for (int i = regionalModels.Length - 1; i >= 0; i--)
-                        FinalizeForAssetBundle(null, regionalModels[i].gameObject, _modID, "buildings", regionalModels[i].Region);
+                        FinalizeForAssetBundle(null, regionalModels[i].gameObject, _modID, "buildings", regionalModels[i].RegionalModel.Region);
 
                     FinalizeForAssetBundle(editor, editor.gameObject, _modID, "buildings");
                 }
@@ -388,13 +388,13 @@ namespace FarmManagerWorld.Editors
                     lodValidated = false;
                 }
 
-                if (regions.Contains(item.Region))
+                if (regions.Contains(item.RegionalModel.Region))
                 {
-                    Debug.LogError($"There are more then 1 regional model for {item.Region} in {editor.building.building.Name}");
+                    Debug.LogError($"There are more then 1 regional model for {item.RegionalModel.Region} in {editor.building.building.Name}");
                     regionsValidated = false;
                 }
                 else
-                    regions.Add(item.Region);                
+                    regions.Add(item.RegionalModel.Region);                
             }
 
             return regionsValidated && lodValidated;

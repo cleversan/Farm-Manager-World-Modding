@@ -341,7 +341,7 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         /// Fruit spawn points
         /// </summary>
         [XmlIgnore]
-        public Transform[] FruitsDumies;
+        public Transform[] FruitsDummies;
 
         /// <summary>
         /// Static object i.e. wooden support for plant that will not be scaled

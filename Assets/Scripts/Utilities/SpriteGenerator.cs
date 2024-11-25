@@ -246,17 +246,17 @@ namespace FarmManagerWorld.Utils
 
                 if (ignoreRegion || regionToRender != Region.None)
                 {
-                    List<RegionalModelMod> regionalModels = Extensions.FindGameObjectsByType<RegionalModelMod>().ToList().FindAll(item => buildingsToRender.Contains(item.parentBuildingName));
+                    List<RegionalModelMod> regionalModels = Extensions.FindGameObjectsByType<RegionalModelMod>().ToList().FindAll(item => buildingsToRender.Contains(item.RegionalModel.Name));
                     for (int i = 0; i < regionalModels.Count; i++)
                     {
-                        if (!ignoreRegion && regionToRender != regionalModels[i].Region)
+                        if (!ignoreRegion && regionToRender != regionalModels[i].RegionalModel.Region)
                             continue;
 
-                        if (objectNames.Contains($"{regionalModels[i].parentBuildingName}_{regionToRender}_BuildingSprite"))
+                        if (objectNames.Contains($"{regionalModels[i].RegionalModel.Name}_{regionToRender}_BuildingSprite"))
                             continue;
 
                         objectsToRender.Add(regionalModels[i].gameObject);
-                        objectNames.Add($"{regionalModels[i].parentBuildingName}_{regionToRender}_BuildingSprite");
+                        objectNames.Add($"{regionalModels[i].RegionalModel.Name}_{regionToRender}_BuildingSprite");
                     }
                 }       
             }

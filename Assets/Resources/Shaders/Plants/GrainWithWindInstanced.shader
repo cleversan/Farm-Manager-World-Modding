@@ -7,14 +7,12 @@ Shader "Farm Manager World/GrainWithWindInstanced"
 		_HarvestTex("Harvest (RGBA)", 2D) = "white" {}
 		_OverripingTex("Overriping (RGBA)", 2D) = "white" {}
 		_Grow("Grow", Range(0,1)) = 1
-		_Overriping("Overriping", Range(0,1)) = 0
 		_Bias0("Show Bias", Range(0,1)) = 0.3
 		_Bias1("Stage Seedling Bias", Range(0,1)) = 0.4
 		_Bias2("Stage Blossom Bias", Range(0,1)) = 0.55
 		_Bias3("Stage Harvest Bias", Range(0,1)) = 0.85
-
 		_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
-
+		_Overriping("Overriping", Range(0,1)) = 0
 		_ShakeDisplacement("Displacement", Range(0, 1.0)) = 0
 		_ShakeTime("Shake Time", Range(0, 1.0)) = 0.5
 		_ShakeBending("Shake Bending", Range(0, 1.0)) = 0

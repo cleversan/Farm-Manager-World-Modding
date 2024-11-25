@@ -15,12 +15,32 @@ namespace FarmManagerWorld.Editors.Wizards
         [Header("If set to \"Bush\", Growth State can be added through window \n(Growth State can still be edited via Inspector)")]
         public PlantType PlantType;
 
+        private static GameObject _grainMesh;
+        private static GameObject GrainMesh
+        {
+            get
+            {
+                if (_grainMesh == null)
+                    _grainMesh = Resources.Load<GameObject>("Prefabs/Grain_Model");
+
+                return _grainMesh;
+            }
+        }
+
         private void OnWizardCreate()
         {
             mod = new GameObject("PlantModel");
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.transform.SetParent(mod.transform);
-            cube.transform.localPosition = Vector3.zero;
+            GameObject meshObject;
+            if (PlantType == PlantType.Grain)
+            {
+                meshObject = Instantiate(GrainMesh);
+            }   
+            else
+            {
+                meshObject = GameObject.CreatePrimitive(PrimitiveType.Cube);                
+            }
+            meshObject.transform.SetParent(mod.transform);
+            meshObject.transform.localPosition = Vector3.zero;
 
             PlantProperties properties = new PlantProperties();
             properties.Icon = Icon;
@@ -65,7 +85,7 @@ namespace FarmManagerWorld.Editors.Wizards
         public float Start = 0f;
         [Range(0.0f, 1.0f)]
         public float End = 1f;
-        [Header("Object that will be affected by this Growth State \n(will still be affected by other scaling measures)")]
+        [Header("Object that will be affected by this Growth State")]
         public GameObject[] Objects;
 
         [Header("Fruit mesh that will be rendered at locations of Fruit Dummies")]
@@ -89,7 +109,7 @@ namespace FarmManagerWorld.Editors.Wizards
                 End = End,
                 Objects = Objects,
                 FruitMesh = FruitMesh,
-                FruitsDumies = FruitsDummies,
+                FruitsDummies = FruitsDummies,
                 StaticObject = StaticObject
             };
 

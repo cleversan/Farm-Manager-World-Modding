@@ -76,6 +76,8 @@ namespace FarmManagerWorld.Static
             {"Machine", typeof(MachineMod)},
             {"Vehicle" ,typeof(VehicleMod)},
             {"SowingMachine" ,typeof(SowingMachineMod)},
+            //Other
+            {"RegionalModel", typeof(RegionalModelMod)},
         };
 
         public static Dictionary<Type, bool> BuildingsWithRoadconnector = new Dictionary<Type, bool>

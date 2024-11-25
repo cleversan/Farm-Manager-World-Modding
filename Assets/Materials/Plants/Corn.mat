@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Corn
-  m_Shader: {fileID: 4800000, guid: d5db56d888c4a96418d091ce2d7a1216, type: 3}
+  m_Shader: {fileID: 4800000, guid: e611a792cabac4c4f90b0b2f6ad41913, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -73,6 +73,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Bias0: 0.444
     - _Bias1: 0.4
     - _Bias2: 0.55
     - _Bias3: 0.85
@@ -83,11 +84,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Grow: 1
+    - _Grow: 0.491
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Overriping: 0
+    - _Overriping: 0.251
     - _Parallax: 0.02
     - _ShakeBending: 0
     - _ShakeDisplacement: 0

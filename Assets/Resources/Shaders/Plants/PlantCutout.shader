@@ -10,16 +10,12 @@
 		_Bias1("Stage Seedling Bias", Range(0,1)) = 0.4
 		_Bias2("Stage Blossom Bias", Range(0,1)) = 0.55
 		_Bias3("Stage Harvest Bias", Range(0,1)) = 0.85
-
 		_Cutoff("Base Alpha cutoff", Range(0,.9)) = .5
-
 		_Overriping("Overriping", Range(0,1)) = 0
 		_ShakeDisplacement("Displacement", Range(0, 1.0)) = 0
 		_ShakeTime("Shake Time", Range(0, 1.0)) = 0.5
 		_ShakeBending("Shake Bending", Range(0, 1.0)) = 0
-
 		_WindMultiplier("Wind multiplier", Range(0,1)) = 1
-
 		_TileMultiplier("Tile multiplier", Range(0,20)) = 0
 	}
 		

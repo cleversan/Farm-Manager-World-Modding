@@ -18,6 +18,7 @@ namespace FarmManagerWorld.Editors
         private Quaternion _closedRotation;
         private Quaternion _openedRotation;
 
+        private bool _isOpened = false;
         private void OnEnable()
         {
             entrance = target as EntranceProperties;
@@ -30,12 +31,11 @@ namespace FarmManagerWorld.Editors
             GUILayout.Label("Options only available in play mode");
             if (Application.isPlaying)
             {
-                if (GUILayout.Button("Open entrance"))
+                if (!_isOpened && GUILayout.Button("Open entrance"))
                 {
                     Open();
                 }
-
-                if (GUILayout.Button("Close entrance"))
+                else if (_isOpened && GUILayout.Button("Close entrance"))
                 {
                     Close();
                 }
@@ -60,6 +60,7 @@ namespace FarmManagerWorld.Editors
 
         private void Open()
         {
+            _isOpened = true;
             Initialize();
             entrance.StartCoroutine(OpenCoroutine());
         }
@@ -107,6 +108,7 @@ namespace FarmManagerWorld.Editors
         // access via editor
         private void Close()
         {
+            _isOpened = false;
             entrance.StartCoroutine(CloseCoroutine());
         }
 

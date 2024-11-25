@@ -9,17 +9,24 @@ namespace FarmManagerWorld.Modding.Mods
     /// <summary>
     /// Empty mod model to ease loading of regional models
     /// </summary>
-    public class RegionalModelMod : MonoBehaviour, ICopyTo
+    public class RegionalModelMod : BaseMod, ICopyTo
     {
-        public string parentBuildingName;
-        public StaticInformation.Region Region;
+        public RegionalModelProperties RegionalModel;
+
+        public override Properties properties { get => RegionalModel; set => RegionalModel = (RegionalModelProperties)value; }
+
+        private void Start()
+        {
+            // excplicit null assignment as translation is not needed for regional models
+            properties.Translation = null;
+        }
 
         public void CopyTo(Object oldObject, Object newObject, ref List<Component> componentsToDestroy)
         {
             RegionalModelMod oldModel = oldObject as RegionalModelMod;
             RegionalModelMod newModel = newObject as RegionalModelMod;
 
-            newModel.parentBuildingName = oldModel.parentBuildingName;
+            newModel.RegionalModel = oldModel.RegionalModel;
 
             List<EntranceProperties> entranceProperties = newModel.gameObject.GetComponentsInChildren<EntranceProperties>(true).ToList();
 

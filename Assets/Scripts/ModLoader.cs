@@ -338,7 +338,7 @@ namespace FarmManagerWorld.Modding
             loadedRegionalPrefabs.Add(modRegionalModelObject);
             RegionalModelMod oldRegionalModelMod = modRegionalModelObject.GetComponent<RegionalModelMod>();
             RegionalModelMod newRegionalModelMod = modRegionalModelObject.AddComponent<RegionalModelMod>();
-            newRegionalModelMod.parentBuildingName = oldRegionalModelMod.parentBuildingName;
+            newRegionalModelMod.RegionalModel = oldRegionalModelMod.RegionalModel;
             oldRegionalModelMod.CopyTo(oldRegionalModelMod, newRegionalModelMod, ref componentsToDestroy);
             componentsToDestroy.Add(oldRegionalModelMod);
         }
@@ -367,10 +367,11 @@ namespace FarmManagerWorld.Modding
         {
 #if UNITY_EDITOR
             return Extensions.FindGameObjectsByType<BaseMod>(out paths).Select(item => item.properties).ToList();
-#endif
+#else
             // im just trying to fix one issue, ignore this duct tape solution
             paths = new List<string>();
             return new List<Properties>();
+#endif
         }
 
         public static Mod GetMod(string path)

@@ -292,22 +292,24 @@ namespace FarmManagerWorld.Editors
 
         public void GenerateRoofFirepoint(Vector3 firePoint)
         {
-            GameObject roofFire = new GameObject();
+            FireProperties roofFire = new GameObject().AddComponent<FireProperties>();
+            roofFire.BuildingFireParticleType = BuildingFireParticleType.FireFromRoofs;
             roofFire.name = "RoofFire " + firePoint;
             roofFire.transform.position = firePoint;
             roofFire.transform.localScale = new Vector3(1, 1, 1);
             roofFire.transform.SetParent(roofFires.transform);
-            building.roofFirePoints.Add(roofFire);
+            building.roofFirePoints.Add(roofFire.gameObject);
         }
 
         public void GenerateWallFirepoint(Vector3 firePoint)
         {
-            GameObject wallFire = new GameObject();
+            FireProperties wallFire = new GameObject().AddComponent<FireProperties>();
+            wallFire.BuildingFireParticleType = BuildingFireParticleType.FireFromWalls;
             wallFire.name = "WallFire " + firePoint;
             wallFire.transform.position = firePoint;
             wallFire.transform.localScale = new Vector3(1, 1, 1);
             wallFire.transform.SetParent(wallFires.transform);
-            building.wallFirePoints.Add(wallFire);
+            building.wallFirePoints.Add(wallFire.gameObject);
         }
 
         #endregion

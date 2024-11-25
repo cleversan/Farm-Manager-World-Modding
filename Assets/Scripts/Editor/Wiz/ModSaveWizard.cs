@@ -251,9 +251,8 @@ namespace FarmManagerWorld.Editors.Wizards
                 #region Serialization
 
                 Debug.Log($"Preparing to serialize: {obj.name}");
-                if (obj.GetComponent<BuildingMod>())
-                {
-                    BuildingMod buildMod = obj.GetComponent<BuildingMod>();
+                if (obj.TryGetComponent(out BuildingMod buildMod))
+                {                    
                     if (!buildMod.Validate())
                     {
                         Debug.LogError($"Building mod {buildMod.name} failed validation");
@@ -268,9 +267,20 @@ namespace FarmManagerWorld.Editors.Wizards
                     buildingModsToTranslate.Add(buildMod);
                     ModLoader.Serialize(buildMod.building, Path.Combine(compiledModPath, "buildings", buildMod.building.Name + ".xml"));
                 }
-                else if (obj.GetComponent<ResourceMod>())
+                else if (obj.TryGetComponent(out RegionalModelMod regionalModel))
                 {
-                    ResourceMod resourceMod = obj.GetComponent<ResourceMod>();
+                    regionalModel.RegionalModel.SetBasicType();
+                    if (!regionalModel.Validate())
+                    {
+                        if (ShouldBuildAssetBundles)
+                            assetBundlesWithValidation[assetBundleImplicitName] = false;
+
+                        continue;
+                    }
+                    // RegionalModel does not need additional translation nor it requires saving via .xml
+                }
+                else if (obj.TryGetComponent(out ResourceMod resourceMod))
+                {
                     resourceMod.resource.SetBasicType();
 
                     if (!resourceMod.ValidateResource())
@@ -284,12 +294,11 @@ namespace FarmManagerWorld.Editors.Wizards
                     resourceModsToTranslate.Add(resourceMod);
                     ModLoader.Serialize(obj.GetComponent<ResourceMod>().resource, Path.Combine(compiledModPath, "resources", resourceMod.resource.Name + ".xml"));
                 }
-                else if (obj.GetComponent<PlantMod>())
+                else if (obj.TryGetComponent(out PlantMod plantModStandalone))
                 {
-                    PlantMod plantMod = obj.GetComponent<PlantMod>();
-                    plantMod.Plant.SetBasicType();
+                    plantModStandalone.Plant.SetBasicType();
 
-                    if (!plantMod.Validate())
+                    if (!plantModStandalone.Validate())
                     {
                         if (ShouldBuildAssetBundles)
                             assetBundlesWithValidation[assetBundleImplicitName] = false;
@@ -297,11 +306,10 @@ namespace FarmManagerWorld.Editors.Wizards
                         continue;
                     }
 
-                    ModLoader.Serialize(plantMod.Plant, Path.Combine(compiledModPath, "plants", plantMod.Plant.Name + ".xml"));
+                    ModLoader.Serialize(plantModStandalone.Plant, Path.Combine(compiledModPath, "plants", plantModStandalone.Plant.Name + ".xml"));
                 }
-                else if (obj.GetComponent<AnimalMod>())
+                else if (obj.TryGetComponent(out AnimalMod animalMod))
                 {
-                    AnimalMod animalMod = obj.GetComponent<AnimalMod>();
                     if (!animalMod.Validate())
                     {
                         if (ShouldBuildAssetBundles)
@@ -332,9 +340,8 @@ namespace FarmManagerWorld.Editors.Wizards
 
                     ModLoader.Serialize(container, Path.Combine(compiledModPath, "plantFull", plantMod.Plant.Name + ".xml"));
                 }
-                else if (obj.GetComponent<VehicleMod>())
-                {
-                    VehicleMod vehicleMod = obj.GetComponent<VehicleMod>();
+                else if (obj.TryGetComponent(out VehicleMod vehicleMod))
+                {                    
                     vehicleMod.baseMachine.SetBasicType();
 
                     if (!vehicleMod.Validate())
