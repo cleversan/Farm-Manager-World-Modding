@@ -310,5 +310,12 @@ namespace FarmManagerWorld.Static
         {
             "Farm Manager World/GrainWithWindInstanced"
         };
+
+        public static string[] BuildingShaderNames =
+        {
+            "Farm Manager World/Building/Building ORM",
+            "Farm Manager World/Building/Building Per InstanceData ORM Cutout",
+            "Farm Manager World/Building/Building Per InstanceData ORM"
+        };
     }
 }

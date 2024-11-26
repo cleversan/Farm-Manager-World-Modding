@@ -24,9 +24,14 @@ namespace FarmManagerWorld.Editors.Wizards
         public float BaseMarketAmount = 100;
         public float ExpirationDate = 100;
         public float InitialBasePrice = 2;
-        public float MaxPercentageDailyPriceGrowth = 0.0005f;
-        public float MaxPercentageDailyPriceDrop = -0.0005f;
+        public float MaxDailyPriceGrowth = 0.0005f;
+        public float MaxDailyPriceDrop = -0.0005f;
         public float FoodQuality = 0.3f;
+
+        private void Awake()
+        {
+            minSize = new Vector2(300, 300);
+        }
 
         public virtual GameObject Create(bool addResourceEditor = true)
         {
@@ -43,8 +48,8 @@ namespace FarmManagerWorld.Editors.Wizards
             resourceMod.resource.BaseMarketAmount = BaseMarketAmount;
             resourceMod.resource.ExpirationDate = ExpirationDate;
             resourceMod.resource.InitialBasePrice = InitialBasePrice;
-            resourceMod.resource.MaxPercentageDailyPriceDrop = MaxPercentageDailyPriceDrop;
-            resourceMod.resource.MaxPercentageDailyPriceGrowth = MaxPercentageDailyPriceGrowth;
+            resourceMod.resource.MaxPercentageDailyPriceDrop = MaxDailyPriceDrop;
+            resourceMod.resource.MaxPercentageDailyPriceGrowth = MaxDailyPriceGrowth;
             resourceMod.resource.FoodQuality = FoodQuality;
             resourceMod.resource.BasicType = resourceWizardType.ToString();
             gameObject.name = resourceMod.resource.Name + "_Resource";
@@ -187,16 +192,16 @@ namespace FarmManagerWorld.Editors.Wizards
         public PlantMod plant;
 
         public Material HarvestMaterial;
-        public GameObject HarvestChestTrailerPlane;
-        public bool UseHarvestMaterialOnMesh = false;
-        public bool UseHarvestMaterialOnKisten = false;
+        public GameObject HarvestTrailerPlane;
+        public bool UseMaterialOnMesh = false;
+        public bool UseMaterialOnKisten = false;
         public override ResourceProperties ExtraValuesInput(ResourceProperties resource)
         {
             FoliageResourceProperties b = (FoliageResourceProperties)resource;
             b.HarvestMaterial = HarvestMaterial;
-            b.HarvestChestTrailerPlane = HarvestChestTrailerPlane;
-            b.UseHarvestMaterialOnMesh = UseHarvestMaterialOnMesh;
-            b.UseHarvestMaterialOnKisten = UseHarvestMaterialOnKisten;
+            b.HarvestChestTrailerPlane = HarvestTrailerPlane;
+            b.UseHarvestMaterialOnMesh = UseMaterialOnMesh;
+            b.UseHarvestMaterialOnKisten = UseMaterialOnKisten;
 
             return resource;
         }

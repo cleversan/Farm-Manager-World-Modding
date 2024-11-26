@@ -5,6 +5,7 @@ using FarmManagerWorld.Static;
 using UnityEngine;
 using System.Linq;
 using FarmManagerWorld.Translations;
+using FarmManagerWorld.Editors;
 
 namespace FarmManagerWorld.Modding.Mods
 {
@@ -21,6 +22,17 @@ namespace FarmManagerWorld.Modding.Mods
 
         public List<GameObject> roofFirePoints = new List<GameObject>();
         public List<GameObject> wallFirePoints = new List<GameObject>();
+        
+        private bool allowSkinnedMeshRenderers
+        {
+            get
+            {
+                if (TryGetComponent(out BuildingEditor editor))
+                    return editor.AllowSkinnedMeshRenderers;
+
+                return false;
+            }
+        }
 
         public bool NeedParkingSpaceCandidate
         {
@@ -32,9 +44,10 @@ namespace FarmManagerWorld.Modding.Mods
             bool validateRoadconnectors = ValidateRoadconnectors();
             bool validateParkingSpaceColliders = ValidateParkingSpaceColliders();
             bool validateParkingSpaceCandidates = ValidateParkingSpaceCandidates();
+            bool validateSkinnedMeshRenderers = ValidateMeshRenderers();
             bool validateBuildingProperties = building.ValidateProperties();
 
-            return validateRoadconnectors && validateParkingSpaceColliders && validateParkingSpaceCandidates && validateBuildingProperties;
+            return validateRoadconnectors && validateParkingSpaceColliders && validateParkingSpaceCandidates && validateSkinnedMeshRenderers &&  validateBuildingProperties;
         }
 
         private bool ValidateRoadconnectors()
@@ -95,6 +108,27 @@ namespace FarmManagerWorld.Modding.Mods
                 Debug.LogError($"Building {building.Name} has no ParkingSpaceProperties components in children, validation failed");
 
             return validated;
+        }
+
+        private bool ValidateMeshRenderers()
+        {
+            int skinnedMeshCount = GetComponentsInChildren<SkinnedMeshRenderer>().Length;
+            if (skinnedMeshCount > 0)
+            {
+                if (allowSkinnedMeshRenderers)
+                {
+                    Debug.LogWarning($"SkinnedMeshRenderers detected in building {building.Name}. Meshes using SkinnedMeshRenderer will not have outlines.");
+                    return true;
+                }
+                else
+                {
+                    Debug.LogError($"SkinnedMeshRenderers detected in building {building.Name}, set \"AllowSkinnedMeshRenderers\" to true in BuildingEditor " +
+                        $"component to allow compilation or press \"Convert SkinnedMeshRenderers\" button to convert to them to MeshRenderers");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public bool IsRegional

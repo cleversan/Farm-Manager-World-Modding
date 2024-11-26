@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -298,6 +299,47 @@ public static class Extensions
 
         GameObject.Destroy(box);
         return isVisible;
+    }
+
+    public static bool SaveTextureToPNG(string imageSavePath, Texture2D textureToSave)
+    {
+
+        if (!File.Exists(imageSavePath))
+        {
+            RenderTexture temporaryTexture = RenderTexture.GetTemporary(textureToSave.width, textureToSave.height);
+            Graphics.Blit(textureToSave, temporaryTexture);
+            RenderTexture.active = temporaryTexture;
+            Texture2D exportPreview = new Texture2D(textureToSave.width, textureToSave.height);
+            exportPreview.ReadPixels(new Rect(0, 0, textureToSave.width, textureToSave.height), 0, 0);
+            exportPreview.Apply();
+            File.WriteAllBytes(imageSavePath, exportPreview.EncodeToPNG());
+            GameObject.DestroyImmediate(exportPreview);
+            RenderTexture.ReleaseTemporary(temporaryTexture);
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning($"There is already image at location {imageSavePath}");
+            return false;
+        }
+    }
+
+    public static void ConvertSkinnedMeshRenderers(GameObject parentToConvert)
+    {
+        SkinnedMeshRenderer[] skinnedMeshRenderers = parentToConvert.GetComponentsInChildren<SkinnedMeshRenderer>();
+        int counter = 0;
+        for(int i = skinnedMeshRenderers.Length - 1; i >= 0; i--) 
+        {
+            GameObject skinnedMeshRendererObject = skinnedMeshRenderers[i].gameObject;
+            skinnedMeshRendererObject.AddComponent<MeshRenderer>().sharedMaterials = skinnedMeshRenderers[i].sharedMaterials;
+            skinnedMeshRendererObject.AddComponent<MeshFilter>().sharedMesh = skinnedMeshRenderers[i].sharedMesh;
+            GameObject.DestroyImmediate(skinnedMeshRenderers[i]);
+            ++counter;
+        }
+
+        Debug.Log($"Converted {counter} SkinnedMeshRenderer to MeshRenderer in {parentToConvert.name} GameObject");
+
+        EditorUtility.SetDirty(parentToConvert);
     }
 
 #endif

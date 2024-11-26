@@ -140,6 +140,11 @@ namespace FarmManagerWorld.Editors
                 }
             }
 
+            if (!editor.AllowSkinnedMeshRenderers && GUILayout.Button("Convert Skinned Mesh Renderers"))
+            {
+                Extensions.ConvertSkinnedMeshRenderers(editor.gameObject);
+            }
+
             if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
             {
                 if (editor.building.Validate() && CheckMod(editor.gameObject, _modID, true, true) && CheckRegionalBuildings())

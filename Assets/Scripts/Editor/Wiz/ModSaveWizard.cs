@@ -123,8 +123,8 @@ namespace FarmManagerWorld.Editors.Wizards
             "\nPreviewImage.jpg file in file system. " +
             "\nRember that Sprite needs to have option Read/Write set to true " +
             "\nin Advanced section")]
-        public Sprite previewImage;
-        private Sprite defaultPreviewImage;
+        public Texture2D previewImage;
+        private Texture2D defaultPreviewImage;
 
         private void OnGUI()
         {
@@ -159,20 +159,19 @@ namespace FarmManagerWorld.Editors.Wizards
             {             
                 EditorGUILayout.LabelField(
                    "Preview image that will be exported as a thumbnail of this mod. " +
-                "\nYou can switch it to any Sprite that is available in project or " +
-                "\nby swapping PreviewImage.jpg file in file system. " +
-                "\nRember that Sprite needs to have option Read/Write set to true " +
-                "\nin Advanced section", GUILayout.MinWidth(leftColumnWidth), GUILayout.MinHeight(80), GUILayout.ExpandHeight(false));
+                "\nYou can switch it to any Texture2D that is available in project or " +
+                "\nby swapping PreviewImage.png file in file system.",
+                   GUILayout.MinWidth(leftColumnWidth), GUILayout.MinHeight(80), GUILayout.ExpandHeight(false));
 
                 EditorGUILayout.BeginVertical();
                 {
-                    previewImage = (Sprite)EditorGUILayout.ObjectField(previewImage, typeof(Sprite), false);
-                    if (previewImage != null && !previewImage.texture.isReadable)
+                    previewImage = (Texture2D)EditorGUILayout.ObjectField(previewImage, typeof(Texture2D), false);
+                    if (previewImage == null)
                     {
-                        EditorGUILayout.LabelField("SELECTED SPRITE \nIS NOT READABLE", GUILayout.ExpandHeight(true));
+                        EditorGUILayout.LabelField("You need to select preview sprite before compolation", GUILayout.ExpandHeight(true));
                         canCompile = false;
                     }
-                    
+
                     if (string.IsNullOrEmpty(modName))
                     {
                         canCompile = false;
@@ -440,9 +439,7 @@ namespace FarmManagerWorld.Editors.Wizards
 
             #region Generate Preview Image
 
-            string previewPath = Path.Combine(compiledModPath, "PreviewImage.jpg");
-            if (!File.Exists(previewPath))
-                File.WriteAllBytes(previewPath, previewImage.texture.EncodeToPNG());
+            Extensions.SaveTextureToPNG(Path.Combine(compiledModPath, "PreviewImage.png"), previewImage);
 
             #endregion
 
@@ -456,7 +453,7 @@ namespace FarmManagerWorld.Editors.Wizards
             if (previewImage == null)
             {
                 if (defaultPreviewImage == null)
-                    defaultPreviewImage = Resources.Load<Sprite>("Sprites/moddingPreview");
+                    defaultPreviewImage = Resources.Load<Texture2D>("Sprites/moddingPreview");
 
                 previewImage = defaultPreviewImage;
             }

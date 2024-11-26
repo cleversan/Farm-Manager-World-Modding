@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using FarmManagerWorld.Modding.Mods;
 using FarmManagerWorld.Modding.ObjectProperties;
+using FarmManagerWorld.Static;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -33,6 +34,8 @@ namespace FarmManagerWorld.Editors
 
         [SerializeField]
         private bool ShowBuildingSize = true;
+
+        public bool AllowSkinnedMeshRenderers = false;
 
         public BuildingPlacingMode PlacingMode = BuildingPlacingMode.None;
 
@@ -672,6 +675,9 @@ namespace FarmManagerWorld.Editors
 
             foreach (var renderer in t)
             {
+                if (!StaticInformation.BuildingShaderNames.Contains(renderer.sharedMaterial.shader.name))
+                    continue;
+
                 var props = new MaterialPropertyBlock();
 
                 props.SetColor("_ColorInstanced", Color.white);
