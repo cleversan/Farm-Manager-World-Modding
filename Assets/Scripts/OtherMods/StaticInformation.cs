@@ -311,8 +311,9 @@ namespace FarmManagerWorld.Static
             "Farm Manager World/GrainWithWindInstanced"
         };
 
-        public static string[] BuildingShaderNames =
+        public static string[] AllowedBuildingShaderNames =
         {
+            "Farm Manager World/Building/Fade With Shadow",
             "Farm Manager World/Building/Building ORM",
             "Farm Manager World/Building/Building Per InstanceData ORM Cutout",
             "Farm Manager World/Building/Building Per InstanceData ORM"

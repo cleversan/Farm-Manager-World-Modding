@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using FarmManagerWorld.Static;
 using UnityEngine;
 using System.Linq;
-using FarmManagerWorld.Translations;
 #if UNITY_EDITOR
 using FarmManagerWorld.Editors;
 #endif
@@ -36,9 +35,32 @@ namespace FarmManagerWorld.Modding.Mods
             }
         }
 
+        private bool checkMaterials
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (IsRegional) // ignore checking materials in regional buildings
+                    return false;
+
+                if (TryGetComponent(out BuildingEditor editor))
+                    return editor.CheckMaterials;
+#endif
+                return false;
+            }
+        }
+
         public bool NeedParkingSpaceCandidate
         {
             get { return building.BasicType == "LogisticBuilding" || building.BasicType == "VetBuilding" || building.BasicType == "MechanicBuilding"; }
+        }
+
+        public bool IsRegional
+        {
+            get
+            {
+                return gameObject.GetComponentsInChildren<RegionalModelModManager>(true).Length > 0;
+            }
         }
 
         public override bool Validate()
@@ -46,10 +68,12 @@ namespace FarmManagerWorld.Modding.Mods
             bool validateRoadconnectors = ValidateRoadconnectors();
             bool validateParkingSpaceColliders = ValidateParkingSpaceColliders();
             bool validateParkingSpaceCandidates = ValidateParkingSpaceCandidates();
-            bool validateSkinnedMeshRenderers = ValidateMeshRenderers();
+            bool validateSkinnedMeshRenderers = ValidateSkinnedMeshRenderers();
+            bool validateMaterials = ValidateMaterials();
+            bool validateRegionals = ValidateRegionalModels();
             bool validateBuildingProperties = building.ValidateProperties();
 
-            return validateRoadconnectors && validateParkingSpaceColliders && validateParkingSpaceCandidates && validateSkinnedMeshRenderers &&  validateBuildingProperties;
+            return validateRoadconnectors && validateParkingSpaceColliders && validateParkingSpaceCandidates && validateSkinnedMeshRenderers && validateMaterials && validateRegionals && validateBuildingProperties;
         }
 
         private bool ValidateRoadconnectors()
@@ -112,7 +136,7 @@ namespace FarmManagerWorld.Modding.Mods
             return validated;
         }
 
-        private bool ValidateMeshRenderers()
+        private bool ValidateSkinnedMeshRenderers()
         {
             int skinnedMeshCount = GetComponentsInChildren<SkinnedMeshRenderer>().Length;
             if (skinnedMeshCount > 0)
@@ -133,14 +157,25 @@ namespace FarmManagerWorld.Modding.Mods
             return true;
         }
 
-        public bool IsRegional
+        private bool ValidateMaterials()
         {
-            get
-            {
-                return gameObject.GetComponentsInChildren<RegionalModelModManager>(true).Length > 0;
-            }
-        }
+            if (checkMaterials)            
+                return ValidateRenderersAndMaterials(StaticInformation.AllowedBuildingShaderNames);
+            
+            return true;
+        }      
 
+        private bool ValidateRegionalModels()
+        {
+            if (IsRegional)
+            {
+                var regionalModels = GetComponentsInChildren<RegionalModelMod>();
+                for(int  i = 0; i < regionalModels.Length; ++i)                
+                    regionalModels[i].RegionalModel.Name = building.Name;
+            }
+
+            return true;
+        }
 
         public void CopyTo(UnityEngine.Object oldObject, UnityEngine.Object newObject, ref List<Component> componentsToDestroy)
         {

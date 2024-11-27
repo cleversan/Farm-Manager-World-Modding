@@ -133,6 +133,11 @@ namespace FarmManagerWorld.Modding.ObjectProperties
         /// </summary>
         public Vector3 ParkingSelectorSnapHelper;
 
+        /// <summary>
+        /// Should workers be hidden after entering building i. e. Glasshouse when working inside it
+        /// </summary>
+        public bool HideWorker = true;
+
         public override bool ValidateProperties()
         {
             bool validation = true;

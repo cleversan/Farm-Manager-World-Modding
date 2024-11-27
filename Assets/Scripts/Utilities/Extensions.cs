@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FarmManagerWorld.Modding.ObjectProperties;
+using FarmManagerWorld.Static;
 using UnityEditor;
 using UnityEngine;
 
@@ -238,6 +240,9 @@ public static class Extensions
         return result.ToArray();
     }
 
+    /// <summary>
+    /// Checks if object is visible in camera by testing if each min/max bounds point is visible.
+    /// </summary>
     public static bool IsObjectVisible(this UnityEngine.Camera @this, Bounds bounds)
     {
         GameObject box = new GameObject();
@@ -301,9 +306,14 @@ public static class Extensions
         return isVisible;
     }
 
+    /// <summary>
+    /// Save Texture2D to png at specified path. 
+    /// </summary>
+    /// <param name="imageSavePath">Path where image will be saved</param>
+    /// <param name="textureToSave">Texture2D that will be saved at specified path</param>
+    /// <returns>Bool value indicating if operation was a success</returns>
     public static bool SaveTextureToPNG(string imageSavePath, Texture2D textureToSave)
     {
-
         if (!File.Exists(imageSavePath))
         {
             RenderTexture temporaryTexture = RenderTexture.GetTemporary(textureToSave.width, textureToSave.height);
@@ -324,6 +334,9 @@ public static class Extensions
         }
     }
 
+    /// <summary>
+    /// Convert all SkinnedMeshRenderers to MeshRenderers and MeshFilters
+    /// </summary>
     public static void ConvertSkinnedMeshRenderers(GameObject parentToConvert)
     {
         SkinnedMeshRenderer[] skinnedMeshRenderers = parentToConvert.GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -340,7 +353,7 @@ public static class Extensions
         Debug.Log($"Converted {counter} SkinnedMeshRenderer to MeshRenderer in {parentToConvert.name} GameObject");
 
         EditorUtility.SetDirty(parentToConvert);
-    }
+    }    
 
 #endif
 }

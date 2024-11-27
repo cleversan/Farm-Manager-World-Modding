@@ -36,6 +36,7 @@ namespace FarmManagerWorld.Editors
         private bool ShowBuildingSize = true;
 
         public bool AllowSkinnedMeshRenderers = false;
+        public bool CheckMaterials = true;
 
         public BuildingPlacingMode PlacingMode = BuildingPlacingMode.None;
 
@@ -675,7 +676,7 @@ namespace FarmManagerWorld.Editors
 
             foreach (var renderer in t)
             {
-                if (!StaticInformation.BuildingShaderNames.Contains(renderer.sharedMaterial.shader.name))
+                if (!StaticInformation.AllowedBuildingShaderNames.Contains(renderer.sharedMaterial.shader.name))
                     continue;
 
                 var props = new MaterialPropertyBlock();
@@ -691,7 +692,6 @@ namespace FarmManagerWorld.Editors
                 renderer.SetPropertyBlock(props);
             }
         }
-
     }
 
     public enum BuildingPlacingMode
