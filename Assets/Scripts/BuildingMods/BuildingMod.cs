@@ -5,8 +5,9 @@ using FarmManagerWorld.Static;
 using UnityEngine;
 using System.Linq;
 using FarmManagerWorld.Translations;
+#if UNITY_EDITOR
 using FarmManagerWorld.Editors;
-
+#endif
 namespace FarmManagerWorld.Modding.Mods
 {
     /// <summary>
@@ -27,9 +28,10 @@ namespace FarmManagerWorld.Modding.Mods
         {
             get
             {
+#if UNITY_EDITOR
                 if (TryGetComponent(out BuildingEditor editor))
                     return editor.AllowSkinnedMeshRenderers;
-
+#endif
                 return false;
             }
         }
