@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using FarmManagerWorld.Editors;
 using FarmManagerWorld.Modding;
 using FarmManagerWorld.Modding.Mods;
 using UnityEditor;
@@ -11,7 +12,7 @@ using static FarmManagerWorld.Static.StaticInformation;
 namespace FarmManagerWorld.Utils
 {
 #if UNITY_EDITOR
-    public class SpriteGenerator : MonoBehaviour
+    public class SpriteGenerator : SaveableEditor
     {
         public Camera MainCamera;
         private Camera whiteCam;

@@ -25,10 +25,9 @@ namespace FarmManagerWorld.Editors
         private string _vehicleTagToAdd;
 
 
-        public override void OnEnable()
+        public void OnEnable()
         {
-            base.OnEnable();
-            editor = (MachineEditor)target;
+            editor = target as MachineEditor;
             isMachine = editor.machine is not VehicleMod;
         }       
 

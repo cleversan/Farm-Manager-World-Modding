@@ -10,10 +10,9 @@ namespace FarmManagerWorld.Editors
     {
         public AnimalEditor editor;
 
-        public override void OnEnable()
+        public void OnEnable()
         {
-            base.OnEnable();
-            editor = (AnimalEditor)target;
+            editor = target as AnimalEditor;
         }
 
         public override void OnInspectorGUI()

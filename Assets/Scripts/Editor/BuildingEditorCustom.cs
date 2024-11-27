@@ -20,10 +20,9 @@ namespace FarmManagerWorld.Editors
     {
         public BuildingEditor editor;
 
-        public override void OnEnable()
+        public void OnEnable()
         {
-            base.OnEnable();
-            editor = (BuildingEditor)target;
+            editor = target as BuildingEditor;
         }
 
         public override void OnInspectorGUI()

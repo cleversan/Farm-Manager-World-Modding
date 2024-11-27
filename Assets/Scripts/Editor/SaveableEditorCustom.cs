@@ -13,7 +13,18 @@ namespace FarmManagerWorld.Editors
 { 
     public class SaveableEditorCustom : Editor
     {
-        [HideInInspector] protected SaveableEditor saveableEditor;
+        [HideInInspector] protected SaveableEditor _saveableEditor;
+
+        [HideInInspector] protected virtual SaveableEditor saveableEditor
+        {
+            get
+            {
+                if (_saveableEditor == null)
+                    _saveableEditor = target as SaveableEditor;
+
+                return _saveableEditor;
+            }
+        }
         
         protected string _modID
         {
@@ -25,11 +36,6 @@ namespace FarmManagerWorld.Editors
         {
             get { return saveableEditor.SelectedMod; }
             set { saveableEditor.SelectedMod = value; }
-        }
-
-        public virtual void OnEnable()
-        {
-            saveableEditor = target as SaveableEditor;
         }
 
         protected void FinalizeForAssetBundle(MonoBehaviour editor, GameObject modObject, string modName, string folderName, StaticInformation.Region region = StaticInformation.Region.None)
@@ -210,7 +216,7 @@ namespace FarmManagerWorld.Editors
                         $"Paths for colliding Mod objects: {collisionPaths}", "Ok");
 
                     validation = false;
-                }                    
+                }
             }
 
             if (checkLOD) 

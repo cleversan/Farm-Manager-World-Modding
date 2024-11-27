@@ -27,9 +27,8 @@ namespace FarmManagerWorld.Editors
         private int _ballingMachineIndex = -1;
         private string _ballingMachineTag = "";
                
-        public override void OnEnable()
-        {
-            base.OnEnable();
+        public void OnEnable()
+        {;
             editor = target as PlantEditor;
         }
 

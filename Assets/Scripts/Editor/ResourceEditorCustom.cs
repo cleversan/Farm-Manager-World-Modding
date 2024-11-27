@@ -18,10 +18,9 @@ namespace FarmManagerWorld.Editors
         private string _sowingMachineTag = "";
         private int _selectedSowingMachineIndex = -1;
 
-        public override void OnEnable()
+        public void OnEnable()
         {
-            base.OnEnable();
-            editor = (ResourceEditor)target;
+            editor = target as ResourceEditor;
         }
 
         public override void OnInspectorGUI()

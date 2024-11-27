@@ -12,6 +12,7 @@ using static FarmManagerWorld.Static.StaticInformation;
 
 namespace FarmManagerWorld.Editors
 {
+    [ExecuteInEditMode]
     [CustomEditor(typeof(SpriteGenerator))]
     public class SpriteGeneratorEditor : SaveableEditorCustom
     {
@@ -33,7 +34,7 @@ namespace FarmManagerWorld.Editors
             "South America"             // 3
         };
 
-        public override void OnEnable()
+        public void OnEnable()
         {
             spriteGenerator = target as SpriteGenerator;
             spriteGenerator.MainCamera = Camera.main;
