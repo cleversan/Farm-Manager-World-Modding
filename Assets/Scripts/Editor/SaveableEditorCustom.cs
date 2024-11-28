@@ -8,6 +8,8 @@ using FarmManagerWorld.Static;
 using FarmManagerWorld.Modding.Mods;
 using FarmManagerWorld.Modding;
 using System;
+using System.Runtime.Remoting.Messaging;
+using System.CodeDom;
 
 namespace FarmManagerWorld.Editors
 { 
@@ -38,49 +40,10 @@ namespace FarmManagerWorld.Editors
             set { saveableEditor.SelectedMod = value; }
         }
 
-        protected void FinalizeForAssetBundle(MonoBehaviour editor, GameObject modObject, string modName, string folderName, StaticInformation.Region region = StaticInformation.Region.None)
+        protected bool _overrideModObject
         {
-            var go = modObject;
-            var mod = ModLoader.GetMods().FirstOrDefault(item => item.id == modName);
-            modObject.GetComponent<BaseMod>().properties.Mod = mod;
-            var assetPath = Path.Combine(mod.Folder, folderName, modObject.name + ".prefab");
-            assetPath = AssetDatabase.GenerateUniqueAssetPath(assetPath);
-
-            if (editor != null)
-                DestroyImmediate(editor);
-
-            var prefab = PrefabUtility.SaveAsPrefabAsset(go, assetPath);
-
-            assetPath = AssetDatabase.GetAssetPath(prefab);
-
-            var importer = AssetImporter.GetAtPath(assetPath);
-            importer.assetBundleName = mod.id;
-            
-            switch(region)
-            {
-                default:
-                case StaticInformation.Region.None:
-                    importer.assetBundleVariant = "default";
-                    break;
-
-                case StaticInformation.Region.Europe:
-                    importer.assetBundleVariant = "europe";
-                    break;
-
-
-                case StaticInformation.Region.SouthAmerica:
-                    importer.assetBundleVariant = "southamerica";
-                    break;
-
-
-                case StaticInformation.Region.Asia:
-                    importer.assetBundleVariant = "asia";
-                    break;
-            }    
-
-
-            PrefabUtility.InstantiatePrefab(prefab);
-            DestroyImmediate(go);
+            get { return saveableEditor.OverrideModObject; }
+            set { saveableEditor.OverrideModObject = value; }
         }
 
         protected void ModPopup(string header = "Mod for compilation")
@@ -181,11 +144,18 @@ namespace FarmManagerWorld.Editors
             if (isCustomValue)            
                 AddCustomTagToStringOnGUI(textFieldHeader, ref tagToAdd, ref stringWithTags, replaceTag, false);            
             else            
-                AddTagToStringOnFromDropdownGUI(dropdownHeader, dropdownLabel, ref stringWithTags, tagsToChoose, ref index, ref tagToAdd, replaceTag, false);
-            
+                AddTagToStringOnFromDropdownGUI(dropdownHeader, dropdownLabel, ref stringWithTags, tagsToChoose, ref index, ref tagToAdd, replaceTag, false);            
         }
 
-        protected bool CheckMod(GameObject objectToCheck, string modID, bool checkLOD, bool checkMod)
+        protected void BoolDrawer(ref bool valueToChange, string toggleMessage)
+        {
+            GUILayout.BeginHorizontal();
+            valueToChange = GUILayout.Toggle(valueToChange, toggleMessage);
+            GUILayout.Label(valueToChange ? "Will override mod" : "Override disabled");
+            GUILayout.EndHorizontal();
+        }
+
+        protected bool CheckMod(GameObject objectToCheck, string modID, bool checkLOD, bool checkMod, bool allowOverride)
         {
             if (checkMod && string.IsNullOrEmpty(modID))
             {
@@ -197,26 +167,45 @@ namespace FarmManagerWorld.Editors
             BaseMod mod = objectToCheck.GetComponent<BaseMod>();            
             if (mod != null)
             {
-                List<string> paths;
-                string collisionPaths = "";
-
-                List<Modding.ObjectProperties.Properties> modProperties = ModLoader.GetModProperties(out paths);
-                for(int modIndex = 0; modIndex < modProperties.Count; ++modIndex)
+                // first check if this is a prefab and just check if basic information will be overriden
+                PrefabAssetType prefabAssetType = PrefabUtility.GetPrefabAssetType(objectToCheck);
+                if (prefabAssetType != PrefabAssetType.NotAPrefab && prefabAssetType != PrefabAssetType.MissingAsset)
                 {
-                    if (paths[modIndex].Contains("Assets/ExampleMod")) // ignore example mods when searching for mod to be 
-                        continue;
+                    // Get the corresponding prefab asset
+                    BaseMod overridenMod = PrefabUtility.GetCorrespondingObjectFromSource(objectToCheck).GetComponent<BaseMod>();
+                    bool willOverride = mod.properties.BasicType != overridenMod.properties.BasicType || mod.properties.Name != overridenMod.properties.Name || !mod.properties.Mod.Equals(overridenMod.properties.Mod);
 
-                    if (modProperties[modIndex].BasicType == mod.properties.BasicType && modProperties[modIndex].Name == mod.properties.Name)
-                        collisionPaths += $"\"{paths[modIndex]}\"\n";                
+                    if (willOverride && !allowOverride)
+                    {
+                        Debug.LogError($"Override will not work due to change to properties.BasicType and properties.Name in object {mod.properties.Name}, {mod.name}\n" +
+                            $"Prefab data: BasicType: {overridenMod.properties.BasicType}, Name: {overridenMod.properties.Name}");
+                        validation = false;
+                    }
                 }
 
-                if (!string.IsNullOrEmpty(collisionPaths))
+                if (!allowOverride)
                 {
-                    EditorUtility.DisplayDialog("Error", $"There is already a Mod object with name \"{mod.properties.Name}\" of type \"{mod.properties.BasicType}\".\n" +
-                        $"Paths for colliding Mod objects: {collisionPaths}", "Ok");
+                    List<string> paths;
+                    string collisionPaths = "";
 
-                    validation = false;
+                    // ignore example mods when searching for mods with collision path
+                    List<Modding.ObjectProperties.Properties> modProperties = ModLoader.GetModProperties(out paths, "Assets/ExampleMod");
+                    for (int modIndex = 0; modIndex < modProperties.Count; ++modIndex)
+                    {
+                        if (modProperties[modIndex].BasicType == mod.properties.BasicType && modProperties[modIndex].Name == mod.properties.Name)
+                            collisionPaths += $"\"{paths[modIndex]}\"\n";
+                    }
+
+                    if (!string.IsNullOrEmpty(collisionPaths))
+                    {
+                        EditorUtility.DisplayDialog("Error", $"There is already a Mod object with name \"{mod.properties.Name}\" of type \"{mod.properties.BasicType}\".\n" +
+                            $"Paths for colliding Mod objects: {collisionPaths}", "Ok");
+
+                        validation = false;
+                    }
                 }
+
+                
             }
 
             if (checkLOD) 
@@ -253,7 +242,70 @@ namespace FarmManagerWorld.Editors
 
             return validation;
         }
+
+        protected void FinalizeForAssetBundle(MonoBehaviour editor, GameObject modObject, string modName, string folderName, StaticInformation.Region region = StaticInformation.Region.None)
+        {
+            if (editor != null)
+                DestroyImmediate(editor);
+
+            PrefabAssetType prefabAssetType = PrefabUtility.GetPrefabAssetType(modObject); // if this object is a prefab, just apply changes
+            if (prefabAssetType != PrefabAssetType.NotAPrefab && prefabAssetType != PrefabAssetType.MissingAsset)
+            {
+                PrefabUtility.ApplyPrefabInstance(modObject, InteractionMode.UserAction);
+                return;
+            }
+
+            var go = modObject;
+            var mod = ModLoader.GetMods().FirstOrDefault(item => item.id == modName);
+            modObject.GetComponent<BaseMod>().properties.Mod = mod;
+            var assetPath = Path.Combine(mod.Folder, folderName, modObject.name + ".prefab");
+            assetPath = AssetDatabase.GenerateUniqueAssetPath(assetPath);
+
+            
+
+            var prefab = PrefabUtility.SaveAsPrefabAsset(go, assetPath);
+
+            assetPath = AssetDatabase.GetAssetPath(prefab);
+
+            var importer = AssetImporter.GetAtPath(assetPath);
+            importer.assetBundleName = mod.id;
+
+            switch (region)
+            {
+                default:
+                case StaticInformation.Region.None:
+                    importer.assetBundleVariant = "default";
+                    break;
+
+                case StaticInformation.Region.Europe:
+                    importer.assetBundleVariant = "europe";
+                    break;
+
+
+                case StaticInformation.Region.SouthAmerica:
+                    importer.assetBundleVariant = "southamerica";
+                    break;
+
+
+                case StaticInformation.Region.Asia:
+                    importer.assetBundleVariant = "asia";
+                    break;
+            }
+
+
+            PrefabUtility.InstantiatePrefab(prefab);
+            DestroyImmediate(go);
+        }
+
+        protected void RemoveEditorComponentButton()
+        {
+            GUILayout.Space(20);
+            if (GUILayout.Button("Remove editor component"))
+                DestroyImmediate(saveableEditor);
+        }
     }
+
+    
 }
 
 #endif

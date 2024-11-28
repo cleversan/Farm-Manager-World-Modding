@@ -20,13 +20,18 @@ namespace FarmManagerWorld.Editors
             base.OnInspectorGUI();
             ModPopup();
 
-            if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
+            GUILayout.Space(20);
+            BoolDrawer(ref editor.OverrideModObject, "Override Mod Object when finalizing?");
+
+            if (!Application.isPlaying)
             {
-                if (editor.animalMod.Validate() && editor.animalAsResource.Validate() && CheckMod(editor.gameObject, _modID, false, true))
+                if (GUILayout.Button("Finalize for asset bundle") && editor.animalMod.Validate() && editor.animalAsResource.Validate() && CheckMod(editor.gameObject, _modID, false, true, _overrideModObject))
                 {
                     FinalizeForAssetBundle(editor.animalAsResource.GetComponent<ResourceEditor>(), editor.animalAsResource.gameObject, _modID, "resources");
                     FinalizeForAssetBundle(editor, editor.gameObject, _modID, "animals");
                 }
+
+                RemoveEditorComponentButton();
             }
         }
     }

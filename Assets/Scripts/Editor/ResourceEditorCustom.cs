@@ -51,10 +51,13 @@ namespace FarmManagerWorld.Editors
                         ref seedResource.Resource.SowingMachine,
                         true);
                 }
-                
+
+                GUILayout.Space(20);
+                BoolDrawer(ref editor.OverrideModObject, "Override Mod Object");
+
                 if (GUILayout.Button("Finalize for asset bundle"))
                 {
-                    if (editor.resourceMod.Validate() && CheckMod(editor.gameObject, _modID, false, true))
+                    if (editor.resourceMod.Validate() && CheckMod(editor.gameObject, _modID, false, true, _overrideModObject))
                         FinalizeForAssetBundle(editor, editor.gameObject, _modID, "resources");
                 }
             }

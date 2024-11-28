@@ -10,6 +10,7 @@ namespace FarmManagerWorld.Editors
     {
         [HideInInspector] public int SelectedMod;
         [HideInInspector] public string ModID;
+        [HideInInspector] public bool OverrideModObject = false;
     }
 }
 #endif

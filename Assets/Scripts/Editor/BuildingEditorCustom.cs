@@ -144,9 +144,12 @@ namespace FarmManagerWorld.Editors
                 Extensions.ConvertSkinnedMeshRenderers(editor.gameObject);
             }
 
-            if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
+            GUILayout.Space(20);
+            BoolDrawer(ref editor.OverrideModObject, "Override Mod Object");
+
+            if (!Application.isPlaying)
             {
-                if (editor.building.Validate() && CheckMod(editor.gameObject, _modID, true, true) && CheckRegionalBuildings())
+                if (GUILayout.Button("Finalize for asset bundle") && editor.building.Validate() && CheckMod(editor.gameObject, _modID, true, true, _overrideModObject) && CheckRegionalBuildings())
                 {
                     var regionalModels = editor.building.GetComponentsInChildren<RegionalModelMod>(true);
                     for (int i = regionalModels.Length - 1; i >= 0; i--)
@@ -154,6 +157,8 @@ namespace FarmManagerWorld.Editors
 
                     FinalizeForAssetBundle(editor, editor.gameObject, _modID, "buildings");
                 }
+
+                RemoveEditorComponentButton();
             }
         }
 
@@ -386,7 +391,7 @@ namespace FarmManagerWorld.Editors
             bool lodValidated = true;
             foreach(var item in models)
             {
-                if (!CheckMod(item.gameObject, "", true, false))
+                if (!CheckMod(item.gameObject, "", true, false, _overrideModObject))
                 {
                     Debug.LogError($"LOD validation failed at {item.name}");
                     lodValidated = false;

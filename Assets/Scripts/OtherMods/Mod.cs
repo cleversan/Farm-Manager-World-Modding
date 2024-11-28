@@ -29,5 +29,19 @@ namespace FarmManagerWorld.Modding.Mods
         }
         [XmlIgnore]
         public List<AssetBundle> assetBundles = new List<AssetBundle>();
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || obj is not Mod) 
+                return false;
+
+            Mod modToCheck = obj as Mod;
+            return modToCheck.id == id && modToCheck.Title == Title && modToCheck.Author == Author && modToCheck.Version == Version && modToCheck.About == About && modToCheck.Folder == Folder;
+        }
     }
 }

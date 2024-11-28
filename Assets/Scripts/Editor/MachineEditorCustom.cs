@@ -148,10 +148,14 @@ namespace FarmManagerWorld.Editors
             }
 
             GUILayout.Space(20);
-            if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
+            BoolDrawer(ref editor.OverrideModObject, "Override Mod Object");
+
+            if (!Application.isPlaying)
             {
-                if (editor.machine.Validate() && CheckMod(editor.gameObject, _modID, true, true) && CheckForStaffSockets())
+                if (GUILayout.Button("Finalize for asset bundle") && editor.machine.Validate() && CheckMod(editor.gameObject, _modID, true, true, _overrideModObject) && CheckForStaffSockets())
                     FinalizeForAssetBundle(editor, editor.gameObject, _modID, "machines");
+
+                RemoveEditorComponentButton();
             }
         }
 

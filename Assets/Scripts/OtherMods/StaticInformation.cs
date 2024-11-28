@@ -3,7 +3,9 @@ using FarmManagerWorld.Modding.Mods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+#if UNITY_EDITOR
+using FarmManagerWorld.Editors;
+#endif
 namespace FarmManagerWorld.Static
 {
     public static class StaticInformation
@@ -78,6 +80,43 @@ namespace FarmManagerWorld.Static
             {"SowingMachine" ,typeof(SowingMachineMod)},
             //Other
             {"RegionalModel", typeof(RegionalModelMod)},
+        };
+
+        public static Dictionary<string, Type> EditorTypes = new Dictionary<string, Type>
+        {
+            #if UNITY_EDITOR
+            ///Buildings
+            {"AnimalsBuilding" ,typeof(BuildingEditor)},
+            {"ApiaryBuilding" ,typeof(BuildingEditor)},
+            {"DecoBuilding" ,typeof(BuildingEditor)},
+            {"GarageBuilding" ,typeof(BuildingEditor)},
+            {"GlasshouseBuilding" ,typeof(BuildingEditor)},
+            {"HiveBuilding" ,typeof(BuildingEditor)},
+            {"IrrigationBuilding" ,typeof(BuildingEditor)},
+            {"LogisticBuilding" ,typeof(BuildingEditor)},
+            {"MechanicBuilding" ,typeof(BuildingEditor)},
+            {"ProductionBuilding" ,typeof(BuildingEditor)},
+            {"StaffBuilding" ,typeof(BuildingEditor)},
+            {"VetBuilding" ,typeof(BuildingEditor)},
+            {"WarehouseBuilding" ,typeof(BuildingEditor)},
+            ///Resources
+            {"AnimalAsResource" , typeof(ResourceEditor)},
+            {"AnimalResource",typeof(ResourceEditor) },
+            {"ChemicalResource",typeof(ResourceEditor) },
+            {"FertilizingResource" ,typeof(ResourceEditor)},
+            {"FoliageResource" ,typeof(ResourceEditor)},
+            {"HoneyResource" ,typeof(ResourceEditor)},
+            {"SeedResource" , typeof(ResourceEditor)},
+            {"ProductionResource",typeof(ResourceEditor) },
+            {"OtherResource" ,typeof(ResourceEditor)},
+            //Machines
+            {"Machine", typeof(MachineEditor)},
+            {"Vehicle" ,typeof(MachineEditor)},
+            {"SowingMachine" ,typeof(MachineEditor)},
+            //Other
+            {"Animal", typeof(AnimalEditor)},
+            {"Plant", typeof(PlantEditor)},
+#endif
         };
 
         public static Dictionary<Type, bool> BuildingsWithRoadconnector = new Dictionary<Type, bool>

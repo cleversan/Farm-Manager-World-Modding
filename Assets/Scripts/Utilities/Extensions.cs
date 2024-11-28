@@ -214,13 +214,26 @@ public static class Extensions
     /// <summary>
     /// Im just tired, so im gonna copy this random function so future reader, please forgive me
     /// </summary>
-    public static T[] FindGameObjectsByType<T>(out List<string> paths) where T : MonoBehaviour
+    public static T[] FindGameObjectsByType<T>(out List<string> paths, params string[] pathsToIgnore) where T : MonoBehaviour
     {
         string[] temp = AssetDatabase.GetAllAssetPaths();
         List<T> result = new List<T>();
         paths = new List<string>();
+        bool ignoredPathDetected = false;
         foreach (string s in temp)
         {
+            for(int i = 0; i < pathsToIgnore.Length; ++i) 
+            { 
+                if (s.Contains(pathsToIgnore[i]))
+                {
+                    ignoredPathDetected = true;
+                    break;
+                }
+            }
+
+            if (ignoredPathDetected)
+                continue;
+
             if (s.Contains(".prefab"))
             {
                 UnityEngine.Object o = AssetDatabase.LoadMainAssetAtPath(s);

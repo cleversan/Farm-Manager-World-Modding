@@ -128,19 +128,27 @@ namespace FarmManagerWorld.Editors
                 GUILayout.Label("Plant visualisation available in play mode");;
             }
 
-            if (!Application.isPlaying && GUILayout.Button("Finalize for asset bundle"))
-            {
-                bool plantValidated, seedResourceValidated, foliageResourceValidated;
-                plantValidated = editor.plantMod.Validate() && CheckMod(editor.gameObject, _modID, false, true);
-                seedResourceValidated = editor.seedResourceMod != null && editor.seedResourceMod.Validate() && CheckMod(editor.seedResourceMod.gameObject, _modID, false, false);
-                foliageResourceValidated = editor.foliageResourceMod != null && editor.foliageResourceMod.Validate() && CheckMod(editor.foliageResourceMod.gameObject, _modID, false, false);
+            GUILayout.Space(20);
+            BoolDrawer(ref editor.OverrideModObject, "Override Mod Object");
 
-                if (plantValidated && seedResourceValidated && foliageResourceValidated)
+            if (!Application.isPlaying)
+            {
+                if (GUILayout.Button("Finalize for asset bundle"))
                 {
-                    FinalizeForAssetBundle(editor.seedResourceMod.GetComponent<ResourceEditor>(), editor.seedResourceMod.gameObject, _modID, "resources");
-                    FinalizeForAssetBundle(editor.foliageResourceMod.GetComponent<ResourceEditor>(), editor.foliageResourceMod.gameObject, _modID, "resources");
-                    FinalizeForAssetBundle(editor, editor.gameObject, _modID, "plants");
+                    bool plantValidated, seedResourceValidated, foliageResourceValidated;
+                    plantValidated = editor.plantMod.Validate() && CheckMod(editor.gameObject, _modID, false, true, _overrideModObject);
+                    seedResourceValidated = editor.seedResourceMod != null && editor.seedResourceMod.Validate() && CheckMod(editor.seedResourceMod.gameObject, _modID, false, false, _overrideModObject);
+                    foliageResourceValidated = editor.foliageResourceMod != null && editor.foliageResourceMod.Validate() && CheckMod(editor.foliageResourceMod.gameObject, _modID, false, false, _overrideModObject);
+
+                    if (plantValidated && seedResourceValidated && foliageResourceValidated)
+                    {
+                        FinalizeForAssetBundle(editor.seedResourceMod.GetComponent<ResourceEditor>(), editor.seedResourceMod.gameObject, _modID, "resources");
+                        FinalizeForAssetBundle(editor.foliageResourceMod.GetComponent<ResourceEditor>(), editor.foliageResourceMod.gameObject, _modID, "resources");
+                        FinalizeForAssetBundle(editor, editor.gameObject, _modID, "plants");
+                    }
                 }
+
+                RemoveEditorComponentButton();                
             }
         }
     }
